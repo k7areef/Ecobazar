@@ -5,11 +5,18 @@ import App from './App.jsx'
 
 // React Route
 import { BrowserRouter } from 'react-router-dom'
+// App Contexts
+import AppContexts from '@contexts/AppContexts'
+import AppModals from '@modals/AppModals'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <AppContexts>
+        <AppModals>
+          <App />
+        </AppModals>
+      </AppContexts>
     </BrowserRouter>
   </StrictMode>,
 )

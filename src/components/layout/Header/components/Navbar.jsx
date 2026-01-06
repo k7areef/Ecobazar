@@ -1,6 +1,6 @@
 function Navbar() {
     return (
-        <nav>
+        <nav className="py-3">
             <div className="container">
                 Navbar
             </div>

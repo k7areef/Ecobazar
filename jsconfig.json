@@ -6,6 +6,8 @@
       "@components/*": ["components/*"],
       "@assets/*": ["assets/*"],
       "@hooks/*": ["hooks/*"],
+      "@modals/*": ["modals/*"],
+      "@contexts/*": ["contexts/*"],
     }
   }
 }

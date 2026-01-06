@@ -4,7 +4,7 @@ import Topbar from "./components/Topbar";
 
 function Header() {
     return (
-        <header>
+        <header className="bg-white">
             <Topbar />
             <MiddleBar />
             <Navbar />
