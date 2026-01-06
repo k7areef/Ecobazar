@@ -6,3 +6,34 @@
   width: 100%;
   max-width: 80rem;
 }
+
+@theme {
+  /* Main */
+  --color-primary: #36b200;
+  --color-hard-primary: #37742b;
+  --color-soft-primary: #8dd184;
+  --color-warning: #f68900;
+  --color-danger: #e14944;
+  /* Gray */
+  --color-gray-900: #191919;
+  --color-gray-800: #333333;
+  --color-gray-700: #4c4c4c;
+  --color-gray-600: #666666;
+  --color-gray-500: #7f7f7f;
+  --color-gray-400: #999999;
+  --color-gray-300: #b3b3b3;
+  --color-gray-200: #cccccc;
+  --color-gray-100: #e6e6e6;
+  --color-gray-50: #f2f2f2;
+  /* Green Gray */
+  --color-gray-900: #052600;
+  --color-gray-800: #1c3b18;
+  --color-gray-700: #30572c;
+  --color-gray-600: #456b40;
+  --color-gray-500: #647f61;
+  --color-gray-400: #7d997b;
+  --color-gray-300: #99b296;
+  --color-gray-200: #b5ccb3;
+  --color-gray-100: #dbe5da;
+  --color-gray-50: #edf2ee;
+}
