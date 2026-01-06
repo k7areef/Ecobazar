@@ -53,3 +53,9 @@ button:focus,
 select:focus {
   outline: none;
 }
+
+@media (max-width: 480px) {
+  p {
+  font-size: 14px;
+  }
+}
