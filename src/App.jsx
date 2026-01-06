@@ -27,7 +27,7 @@ import NotFoundPage from "@pages/other/NotFoundPage";
 
 // * Components:
 import Header from "@components/layout/Header";
-import Subscribe from "@components/common/Subscribe";
+import Subscribe from "@components/layout/Subscribe";
 import Footer from "@components/layout/Footer";
 
 function App() {

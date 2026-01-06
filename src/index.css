@@ -26,16 +26,16 @@
   --color-gray-100: #e6e6e6;
   --color-gray-50: #f2f2f2;
   /* Green Gray */
-  --color-gray-900: #052600;
-  --color-gray-800: #1c3b18;
-  --color-gray-700: #30572c;
-  --color-gray-600: #456b40;
-  --color-gray-500: #647f61;
-  --color-gray-400: #7d997b;
-  --color-gray-300: #99b296;
-  --color-gray-200: #b5ccb3;
-  --color-gray-100: #dbe5da;
-  --color-gray-50: #edf2ee;
+  --color-green-gray-900: #052600;
+  --color-green-gray-800: #1c3b18;
+  --color-green-gray-700: #30572c;
+  --color-green-gray-600: #456b40;
+  --color-green-gray-500: #647f61;
+  --color-green-gray-400: #7d997b;
+  --color-green-gray-300: #99b296;
+  --color-green-gray-200: #b5ccb3;
+  --color-green-gray-100: #dbe5da;
+  --color-green-gray-50: #edf2ee;
 }
 
 /* Global */
