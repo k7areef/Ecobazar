@@ -37,3 +37,19 @@
   --color-gray-100: #dbe5da;
   --color-gray-50: #edf2ee;
 }
+
+/* Global */
+body {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+
+button {
+  cursor: pointer;
+}
+
+input:focus,
+button:focus,
+select:focus {
+  outline: none;
+}

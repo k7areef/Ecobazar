@@ -32,7 +32,7 @@ import Footer from "@components/layout/Footer";
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App text-gray-900'>
       {/* Header */}
       <Header />
       {/* Routes */}
