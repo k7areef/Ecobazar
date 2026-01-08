@@ -20,7 +20,7 @@ function Button({ to = "", variant = "primary", children, ...props }) {
         secondary: "bg-primary/10 text-primary sm:hover:bg-primary sm:hover:text-white rounded-full",
     };
 
-    const finalClassName = `${variants[variant]} py-3 px-6 font-semibold transition ${props.className}`;
+    const finalClassName = `${variants[variant]} p-1.5 md:py-3  px-3 md:px-6 font-semibold transition ${props.className}`;
 
     if (to) {
         return (

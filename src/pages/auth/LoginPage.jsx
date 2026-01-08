@@ -1,10 +1,10 @@
+import AuthForm from "@components/auth/AuthForm";
+
 function LoginPage() {
     return (
-        <div className="login-page">
+        <div className="login-page py-5 md:py-10">
             <div className="container">
-                <div className="container">
-                    Login Page
-                </div>
+                <AuthForm method="login" />
             </div>
         </div>
     );

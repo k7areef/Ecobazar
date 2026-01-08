@@ -8,6 +8,8 @@
       "@hooks/*": ["hooks/*"],
       "@modals/*": ["modals/*"],
       "@contexts/*": ["contexts/*"],
+      "@configs/*": ["configs/*"],
+      "@utils/*": ["utils/*"],
     }
   }
 }
