@@ -28,3 +28,30 @@ export const SIGNUP = async (data) => {
         console.log(err);
     }
 };
+
+export const GET_AUTH_USER = async (jwt) => {
+    try {
+        const res = await fetch(`${api}/users/me`, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            }
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};
+export const GET_MY_CART = async (jwt) => {
+    try {
+        const res = await fetch(`${api}/carts/me`, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            }
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};

@@ -1,3 +1,4 @@
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 // * Pages:
@@ -30,52 +31,57 @@ import Header from "@components/layout/Header";
 import Subscribe from "@components/layout/Subscribe";
 import Footer from "@components/layout/Footer";
 
+// ? AuthInitializer:
+import AuthInitializer from "@components/auth/AuthInitializer";
+
 function App() {
   return (
-    <div className='App text-gray-900'>
-      {/* Header */}
-      <Header />
-      {/* Routes */}
-      <Routes>
-        {/* Main Pages */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/shop/:productId/detail" element={<ProductDetailPage />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+    <AuthInitializer>
+      <div className='App text-gray-900'>
+        {/* Header */}
+        <Header />
+        {/* Routes */}
+        <Routes>
+          {/* Main Pages */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop/:productId/detail" element={<ProductDetailPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
-        {/* Auth Pages */}
-        <Route path="/auth">
-          {/* Index Route to redirect to login page when path is => /auth */}
-          <Route index element={<Navigate to={'/auth/login'} replace />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="signup" element={<SignupPage />} />
-        </Route>
+          {/* Auth Pages */}
+          <Route path="/auth">
+            {/* Index Route to redirect to login page when path is => /auth */}
+            <Route index element={<Navigate to={'/auth/login'} replace />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="signup" element={<SignupPage />} />
+          </Route>
 
-        {/* Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />}>
-          {/* Index Route to make a overview page as a first route */}
-          <Route index element={<DashboardOverviewPage />} />
-          <Route path="order-history" element={<DashboardOrderHistoryPage />} />
-          <Route path="order-history/:orderId/detail" element={<DashboardOrderDetailPage />} />
-          <Route path="setting" element={<DashboardSettingPage />} />
-        </Route>
+          {/* Dashboard */}
+          <Route path="/dashboard" element={<Dashboard />}>
+            {/* Index Route to make a overview page as a first route */}
+            <Route index element={<DashboardOverviewPage />} />
+            <Route path="order-history" element={<DashboardOrderHistoryPage />} />
+            <Route path="order-history/:orderId/detail" element={<DashboardOrderDetailPage />} />
+            <Route path="setting" element={<DashboardSettingPage />} />
+          </Route>
 
-        {/* Other */}
-        <Route path="/blog" element={<BlogListPage />} />
-        <Route path="/blog/:blogId/detail" element={<BlogDetailPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/faqs" element={<FaqsPage />} />
-        {/* Not Found */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      {/* Subscribe */}
-      <Subscribe />
-      {/* Footer */}
-      <Footer />
-    </div>
+          {/* Other */}
+          <Route path="/blog" element={<BlogListPage />} />
+          <Route path="/blog/:blogId/detail" element={<BlogDetailPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faqs" element={<FaqsPage />} />
+          {/* Not Found */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        {/* Subscribe */}
+        <Subscribe />
+        {/* Footer */}
+        <Footer />
+      </div>
+    </AuthInitializer>
   )
 }
 
