@@ -1,3 +1,4 @@
+import { useAuth } from "@contexts/AuthContext";
 import { LOGIN, SIGNUP } from "@utils/api";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,7 @@ const saveJWT = (jwt) => {
 
 function useAuthForm(method = "login") {
     const navigate = useNavigate();
+    const { setJwt } = useAuth();
     const handleSubmit = React.useCallback(async (values, actions) => {
         const { setSubmitting, setFieldError } = actions;
         try {
@@ -22,7 +24,9 @@ function useAuthForm(method = "login") {
                     console.log(data.error);
                     return;
                 }
-                saveJWT(data.jwt);
+                const jwt = data.jwt;
+                saveJWT(jwt);
+                setJwt(jwt);
                 navigate('/');
             } else if (method === "signup") {
                 const data = await SIGNUP(values);
@@ -31,13 +35,15 @@ function useAuthForm(method = "login") {
                     console.log(data.error);
                     return;
                 }
-                saveJWT(data.jwt);
+                const jwt = data.jwt;
+                saveJWT(jwt);
+                setJwt(jwt);
                 navigate('/');
             }
         } finally {
             setSubmitting(false);
         }
-    }, [navigate, method]);
+    }, [method, setJwt, navigate]);
     return { handleSubmit }
 };
 

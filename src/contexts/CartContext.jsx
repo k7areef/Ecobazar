@@ -1,12 +1,21 @@
 import React from "react";
+import { useAuth } from "./AuthContext";
 
 const CartContext = React.createContext();
 
 export const CartContextProvider = ({ children }) => {
 
-    const jwtStored = localStorage.getItem("jwt");
+    const { jwt } = useAuth();
     const [cart, setCart] = React.useState(null);
-    const [isLoading, setIsLoading] = React.useState(jwtStored ? true : false);
+    const [isLoading, setIsLoading] = React.useState(jwt ? true : false);
+
+    React.useEffect(() => {
+        if (jwt) {
+            setIsLoading(true);
+        } else {
+            setIsLoading(false);
+        }
+    }, [jwt]);
 
     return (
         <CartContext.Provider

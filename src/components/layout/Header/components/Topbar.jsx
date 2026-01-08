@@ -1,4 +1,5 @@
 import Dropdown from "@components/UI/Dropdown";
+import { useAuth } from "@contexts/AuthContext";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -6,9 +7,10 @@ import { Link } from "react-router-dom";
 
 function Topbar() {
 
+    const { jwt, isLoading, user } = useAuth();
+
     const [language, setLanguage] = React.useState("Eng");
     const [currency, setCurrency] = React.useState("USD");
-    const [user] = React.useState(null);
 
     return (
         <div className="topbar bg-gray-800 text-gray-300 py-3">
@@ -49,17 +51,30 @@ function Topbar() {
                     <span>|</span>
                     {/* Auth Links */}
                     {
-                        !user && <div className="auth-links flex items-center gap-1">
-                            <Link
-                                to={'/auth/login'}
-                                className="transition sm:hover:text-white"
-                            >Sign In</Link>
-                            <span>/</span>
-                            <Link
-                                to={'/auth/signup'}
-                                className="transition sm:hover:text-white"
-                            >Sign Up</Link>
-                        </div>
+                        (jwt && isLoading) ? (
+                            "Loading..."
+                        ) : (
+                            !user ? (
+                                <div className="auth-links flex items-center gap-1">
+                                    <Link
+                                        to={'/auth/login'}
+                                        className="transition sm:hover:text-white"
+                                    >Sign In</Link>
+                                    <span>/</span>
+                                    <Link
+                                        to={'/auth/signup'}
+                                        className="transition sm:hover:text-white"
+                                    >Sign Up</Link>
+                                </div>
+                            ) : (
+                                <Link
+                                    to={'/dashboard'}
+                                    className="sm:hover:text-white sm:hover:underline"
+                                >
+                                    <span>{user?.username}</span>
+                                </Link>
+                            )
+                        )
                     }
                 </div>
             </div>

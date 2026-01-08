@@ -1,14 +1,16 @@
 import AppLogo from "@components/common/AppLogo";
 import Button from "@components/UI/Button";
+import { useCart } from "@contexts/CartContext";
 import { useModals } from "@contexts/ModalsContext";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faSearch, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faShoppingBag, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 function MiddleBar() {
 
     const { setOpenCartModal } = useModals();
+    const { isLoading } = useCart();
 
     return (
         <div className="middle-bar border-b border-b-gray-100 py-3">
@@ -43,12 +45,20 @@ function MiddleBar() {
                         className="flex items-center gap-4 cursor-pointer"
                     >
                         <div className="cart-counter relative">
-                            <div className="count w-5.5 h-5.5 rounded-full bg-hard-primary text-white border border-white absolute -top-3 -right-1.5 flex items-center justify-center text-sm">2</div>
+                            <div className="count w-5.5 h-5.5 rounded-full bg-hard-primary text-white border border-white absolute -top-3 -right-1.5 flex items-center justify-center text-sm">
+                                {isLoading ? (<FontAwesomeIcon icon={faSpinner} className="animate-spin" />) : (2)}
+                            </div>
                             <FontAwesomeIcon icon={faShoppingBag} className="text-xl sm:text-3xl" />
                         </div>
                         <div className="cart-info">
-                            <p className="text-gray-700 font-medium">Shopping cart:</p>
-                            <div className="cart-total font-medium sm:text-xl">$57.00</div>
+                            <p className="text-gray-700 font-medium mb-1">Shopping cart:</p>
+                            {
+                                isLoading ? (
+                                    <div className="bg-gray-100 h-4 w-20 roundedsm animate-pulse"></div>
+                                ) : (
+                                    <div className="cart-total font-medium sm:text-xl">$57.00</div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

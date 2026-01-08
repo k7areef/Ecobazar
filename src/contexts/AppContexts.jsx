@@ -6,11 +6,11 @@ function AppContexts({ children }) {
     return (
         <>
             <AuthContextProvider>
-                <ModalsContextProvider>
-                    <CartContextProvider>
+                <CartContextProvider>
+                    <ModalsContextProvider>
                         {children}
-                    </CartContextProvider>
-                </ModalsContextProvider>
+                    </ModalsContextProvider>
+                </CartContextProvider>
             </AuthContextProvider>
         </>
     )
