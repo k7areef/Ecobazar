@@ -28,6 +28,7 @@ import NotFoundPage from "@pages/other/NotFoundPage";
 
 // * Components:
 import Header from "@components/layout/Header";
+import Breadcrumb from "@components/layout/Breadcrumb";
 import Subscribe from "@components/layout/Subscribe";
 import Footer from "@components/layout/Footer";
 
@@ -40,6 +41,8 @@ function App() {
       <div className='App text-gray-900'>
         {/* Header */}
         <Header />
+        {/* Breadcrumb */}
+        <Breadcrumb />
         {/* Routes */}
         <Routes>
           {/* Main Pages */}
