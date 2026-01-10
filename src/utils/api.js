@@ -58,7 +58,7 @@ export const GET_MY_CART = async (jwt) => {
 export const UPDATE_MY_CART = async (jwt, data) => {
     try {
         const res = await fetch(`${api}/carts/me`, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 'content-type': 'application/json',
                 authorization: `Bearer ${jwt}`
