@@ -28,8 +28,23 @@ export const SIGNUP = async (data) => {
         console.log(err);
     }
 };
+export const CHANGE_MY_PASSWORD = async (jwt, data) => {
+    try {
+        const res = await fetch(`${api}/auth/change-password`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            },
+            body: JSON.stringify(data)
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};
 
-export const GET_AUTH_USER = async (jwt) => {
+export const GET_MY_USER = async (jwt) => {
     try {
         const res = await fetch(`${api}/users/me`, {
             headers: {
@@ -55,7 +70,7 @@ export const GET_MY_CART = async (jwt) => {
         console.log(err);
     }
 };
-export const UPDATE_MY_CART = async (jwt, data) => {
+export const UPDATE_MY_CART = async (jwt, updatedData) => {
     try {
         const res = await fetch(`${api}/carts/me`, {
             method: "PUT",
@@ -63,7 +78,7 @@ export const UPDATE_MY_CART = async (jwt, data) => {
                 'content-type': 'application/json',
                 authorization: `Bearer ${jwt}`
             },
-            body: JSON.stringify({ data })
+            body: JSON.stringify({ data: updatedData })
         });
         return await res.json();
     } catch (err) {

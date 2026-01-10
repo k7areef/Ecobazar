@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "@contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
-import { GET_AUTH_USER, GET_MY_CART } from "@utils/api";
+import { GET_MY_USER, GET_MY_CART } from "@utils/api";
 import { useCart } from "@contexts/CartContext";
 
 function AuthInitializer({ children }) {
@@ -10,7 +10,7 @@ function AuthInitializer({ children }) {
     const { setCart, setIsLoading: setCartIsLoading } = useCart();
     const { data: authData, isLoading } = useQuery({
         queryKey: ["AUTH"],
-        queryFn: () => GET_AUTH_USER(jwt),
+        queryFn: () => GET_MY_USER(jwt),
         refetchOnWindowFocus: false,
         enabled: !!jwt
     });
