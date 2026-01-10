@@ -55,3 +55,18 @@ export const GET_MY_CART = async (jwt) => {
         console.log(err);
     }
 };
+export const UPDATE_MY_CART = async (jwt, data) => {
+    try {
+        const res = await fetch(`${api}/carts/me`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            },
+            body: JSON.stringify({ data })
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};

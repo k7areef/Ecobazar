@@ -7,35 +7,40 @@ import { useCart } from "@contexts/CartContext";
 function AuthInitializer({ children }) {
 
     const { jwt, setUser, setIsLoading: setAuthIsLoading } = useAuth();
-    // eslint-disable-next-line no-unused-vars
     const { setCart, setIsLoading: setCartIsLoading } = useCart();
-
-    // eslint-disable-next-line no-unused-vars
-    const { data: authData, isSuccess: isAuthSuccess } = useQuery({
+    const { data: authData, isLoading } = useQuery({
         queryKey: ["AUTH"],
         queryFn: () => GET_AUTH_USER(jwt),
         refetchOnWindowFocus: false,
         enabled: !!jwt
     });
-    // const { data: cartData } = useQuery({
-    //     queryKey: ["CART"],
-    //     queryFn: () => GET_MY_CART(jwt),
-    //     refetchOnWindowFocus: false,
-    //     enabled: Boolean(!!jwt && isAuthSuccess)
-    // });
-
     React.useEffect(() => {
-        if (authData) {
-            setUser(authData);
-            setAuthIsLoading(false);
+
+        if (!authData) return;
+
+        if (authData?.error?.status === 401) {
+            localStorage.removeItem('jwt');
+            location.reload()
+            return;
         }
-    }, [authData, setUser, setAuthIsLoading]);
-    // React.useEffect(() => {
-    //     if (cartData) {
-    //         setCart(cartData);
-    //         setCartIsLoading(false);
-    //     }
-    // }, [cartData, setCart, setCartIsLoading]);
+
+        setUser(authData);
+        setAuthIsLoading(false);
+
+    }, [authData, setAuthIsLoading, setUser]);
+
+    const { data: cartData } = useQuery({
+        queryKey: ["CART"],
+        queryFn: () => GET_MY_CART(jwt),
+        refetchOnWindowFocus: false,
+        enabled: Boolean(!!jwt && authData && !isLoading)
+    });
+    React.useEffect(() => {
+        if (cartData) {
+            setCart(cartData);
+            setCartIsLoading(false);
+        }
+    }, [cartData, setCart, setCartIsLoading]);
 
     return children;
 }

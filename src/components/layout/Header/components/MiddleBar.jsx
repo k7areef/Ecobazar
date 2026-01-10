@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 function MiddleBar() {
 
     const { setOpenCartModal } = useModals();
-    const { isLoading } = useCart();
+    const { cart, isLoading } = useCart();
 
     return (
         <div className="middle-bar border-b border-b-gray-100 py-3">
@@ -46,7 +46,7 @@ function MiddleBar() {
                     >
                         <div className="cart-counter relative">
                             <div className="count w-5.5 h-5.5 rounded-full bg-hard-primary text-white border border-white absolute -top-3 -right-1.5 flex items-center justify-center text-sm">
-                                {isLoading ? (<FontAwesomeIcon icon={faSpinner} className="animate-spin" />) : (2)}
+                                {isLoading ? (<FontAwesomeIcon icon={faSpinner} className="animate-spin" />) : (cart?.items_count)}
                             </div>
                             <FontAwesomeIcon icon={faShoppingBag} className="text-xl sm:text-3xl" />
                         </div>
@@ -54,9 +54,9 @@ function MiddleBar() {
                             <p className="text-gray-700 font-medium mb-1">Shopping cart:</p>
                             {
                                 isLoading ? (
-                                    <div className="bg-gray-100 h-4 w-20 roundedsm animate-pulse"></div>
+                                    <div className="bg-gray-100 h-7 w-20 roundedsm animate-pulse"></div>
                                 ) : (
-                                    <div className="cart-total font-medium sm:text-xl">$57.00</div>
+                                    <div className="cart-total font-medium sm:text-xl">${Number(cart?.cart_total).toFixed(2)}</div>
                                 )
                             }
                         </div>
