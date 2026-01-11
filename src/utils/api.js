@@ -1,5 +1,6 @@
 const api = import.meta.env.VITE_API;
 
+// Auth Actions:
 export const LOGIN = async (data) => {
     try {
         const res = await fetch(`${api}/auth/local`, {
@@ -44,6 +45,7 @@ export const CHANGE_MY_PASSWORD = async (jwt, data) => {
     }
 };
 
+// Authenticated User:
 export const GET_MY_USER = async (jwt) => {
     try {
         const res = await fetch(`${api}/users/me`, {
@@ -57,6 +59,8 @@ export const GET_MY_USER = async (jwt) => {
         console.log(err);
     }
 };
+
+// Cart:
 export const GET_MY_CART = async (jwt) => {
     try {
         const res = await fetch(`${api}/carts/me`, {
