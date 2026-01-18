@@ -48,7 +48,7 @@ function App() {
           {/* Main Pages */}
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/shop/:productId/detail" element={<ProductDetailPage />} />
+          <Route path="/shop/:productSlug/:productId/detail" element={<ProductDetailPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />

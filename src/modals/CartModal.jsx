@@ -6,25 +6,29 @@ import { useModals } from "@contexts/ModalsContext";
 import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { UPDATE_MY_CART } from "@utils/api";
 import useUpdateCart from "@hooks/useUpdateCart";
 
-const CartItem = ({ cartItem: { id, quantity, product } }) => {
+const CartItem = ({ cartItem: { id, quantity, product }, closeCartModalHandler }) => {
     const { isLoading, removeFromCart } = useUpdateCart();
     return (
         <div className="cart-item flex items-center gap-3 py-3 not-last-of-type:border-b not-last-of-type:border-b-gray-100">
             <div className="item-image w-35">
                 <img
-                    src={product.image}
+                    src={`http://localhost:1337${product.image?.url}`}
                     alt="Product Image"
+                    className="w-full object-cover"
                 />
             </div>
             <div className="item-info w-full flex items-center justify-between gap-3">
                 <div className="info w-full">
-                    <h3 className="sm:text-lg font-semibold mb-1 line-clamp-1">{product.title}</h3>
+                    <Link
+                        onClick={closeCartModalHandler}
+                        to={`/shop/${product.slug}/${product.documentId}/detail`}
+                        className="sm:text-lg font-semibold mb-1 line-clamp-1 transition sm:hover:text-primary sm:hover:underline"
+                    >{product.title}</Link>
                     <div className="quantity-info">
                         <span className="text-gray-500">{quantity} x </span>
-                        <span className="font-semibold">{product.price}</span>
+                        <span className="font-semibold">{Number(product.price).toFixed(2)}</span>
                     </div>
                 </div>
                 {/* Remove From Cart */}
@@ -115,7 +119,11 @@ function CartModal() {
                                 {/* Cart Items */}
                                 <div className="cart-items">
                                     {
-                                        cart?.items?.map((cartItem, index) => (<CartItem cartItem={cartItem} key={index} />))
+                                        cart?.items?.map((cartItem, index) => (<CartItem
+                                            cartItem={cartItem}
+                                            key={index}
+                                            closeCartModalHandler={closeCartModalHandler}
+                                        />))
                                     }
                                 </div>
                                 {/* Foot Content */}
