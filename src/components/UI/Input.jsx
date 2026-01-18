@@ -11,7 +11,7 @@ function Input({ label, ...input }) {
             }
             <input
                 {...input}
-                className="w-full rounded-md border border-gray-100 p-3"
+                className="w-full rounded-md border border-gray-100 p-3 transition focus:border-primary"
             />
             <ErrorMessage name={input.name} component={'div'} className="mt-2 text-danger first-letter:capitalize" />
         </div>
