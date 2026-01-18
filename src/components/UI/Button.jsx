@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 /**
  * @typedef {Object} CustomButtonProps
  * @property {string} [to]
- * @property {'primary' | 'secondary'} [variant]
+ * @property {'primary' | 'secondary' | 'dark'} [variant]
  * @property {React.ReactNode} children
  * @property {React.ButtonHTMLAttributes<HTMLButtonElement> | import("react-router-dom").LinkProps} [props]
  */
@@ -13,14 +13,16 @@ import { Link } from "react-router-dom";
  * @typedef {CustomButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement> & import("react-router-dom").LinkProps} ButtonProps
  */
 
+
 function Button({ to = "", variant = "primary", children, ...props }) {
 
     const variants = {
         primary: "bg-primary rounded-full text-white sm:hover:bg-hard-primary",
         secondary: "bg-primary/10 text-primary sm:hover:bg-primary sm:hover:text-white rounded-full",
+        dark: "bg-gray-800 text-white rounded-full",
     };
 
-    const finalClassName = `${variants[variant]} p-1.5 md:py-3  px-3 md:px-6 font-semibold transition ${props.className}`;
+    const finalClassName = `${variants[variant]} p-2.5 md:py-3 px-3 md:px-6 font-semibold transition ${props.className}`;
 
     if (to) {
         return (
