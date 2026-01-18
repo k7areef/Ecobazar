@@ -2,7 +2,7 @@ import React from 'react'
 import ContentWrapper from '../components/ContentWrapper'
 import * as Yup from 'yup';
 import { useAuth } from '@contexts/AuthContext';
-import { CHANGE_MY_PASSWORD } from '@utils/api';
+import { UPDATE_MY_USER } from '@utils/api';
 import { Formik } from 'formik';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
@@ -126,32 +126,23 @@ const validationSchema = Yup.object({
 
 function BillingAddress() {
 
-    const { jwt } = useAuth();
+    const { jwt, user } = useAuth();
     const handleSubmit = React.useCallback(async (values, actions) => {
-        const { setSubmitting, setFieldError, resetForm } = actions;
+        const { setSubmitting } = actions;
         try {
-            const data = await CHANGE_MY_PASSWORD(jwt, values);
+            const data = await UPDATE_MY_USER(jwt, user?.documentId, { billing_address: values });
             if (data.error) {
                 console.log(data.error);
-                if (data.error.message === "The provided current password is invalid") {
-                    setFieldError("currentPassword", data.error.message)
-                } else if (data.error.message === "Your new password must be different than your current password") {
-                    setFieldError("password", data.error.message)
-                } else if (data.error.message === "Passwords do not match") {
-                    setFieldError("passwordConfirmation", data.error.message)
-                } else {
-                    setFieldError("currentPassword", data.error.message)
-                }
                 return;
             }
-            resetForm();
+            console.log(data);
         } catch (err) {
             console.log(err);
         } finally {
             setSubmitting(false);
         }
 
-    }, [jwt]);
+    }, [jwt, user?.documentId]);
 
     return (
         <ContentWrapper

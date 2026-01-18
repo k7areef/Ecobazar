@@ -59,6 +59,21 @@ export const GET_MY_USER = async (jwt) => {
         console.log(err);
     }
 };
+export const UPDATE_MY_USER = async (jwt, authenticatedUserDocumentId, updatedData) => {
+    try {
+        const res = await fetch(`${api}/users/${authenticatedUserDocumentId}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            },
+            body: JSON.stringify({ data: updatedData })
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};
 
 // Cart:
 export const GET_MY_CART = async (jwt) => {
