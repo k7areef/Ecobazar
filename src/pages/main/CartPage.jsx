@@ -1,10 +1,13 @@
 import CartSummary from "@components/common/CartSummary";
 import Button from "@components/UI/Button";
 import { useCart } from "@contexts/CartContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function CartPage() {
     const { cart, isLoading } = useCart();
+    // Redirect if cart is empty:
+    if (cart?.items?.length === 0) { return <Navigate to={'/'} replace /> }
+
     return (
         <div className="cart-page py-5 md:py-10">
             <div className="container">
