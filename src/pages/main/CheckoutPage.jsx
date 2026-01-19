@@ -8,7 +8,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CREATE_ORDER, UPDATE_MY_CART } from "@utils/api";
 import { ErrorMessage, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const inpustList = [
@@ -143,7 +143,6 @@ function CheckoutPage() {
     const { jwt, user } = useAuth();
     const { cart, isLoading, setCart } = useCart();
     const navigate = useNavigate();
-
     const handleSubmit = React.useCallback(async (values, actions) => {
         const { setSubmitting } = actions;
         delete values.notes;
@@ -177,7 +176,10 @@ function CheckoutPage() {
         } finally {
             setSubmitting(false);
         }
-    }, [cart?.items, jwt, setCart, user?.documentId]);
+    }, [cart?.items, jwt, navigate, setCart, user?.documentId]);
+
+    // Redirect if cart is empty:
+    if (cart?.items?.length === 0) { return <Navigate to={'/'} replace /> }
 
     return (
         <div className="checkout-page py-5 md:py-10">
