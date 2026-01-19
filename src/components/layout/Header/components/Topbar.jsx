@@ -1,8 +1,8 @@
+import React from "react";
 import Dropdown from "@components/UI/Dropdown";
 import { useAuth } from "@contexts/AuthContext";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Topbar() {
@@ -14,10 +14,10 @@ function Topbar() {
 
     return (
         <div className="topbar bg-gray-800 text-gray-300 py-3">
-            <div className="container flex items-center justify-between max-lg:flex-col">
+            <div className="container flex lg:items-center justify-between max-lg:flex-col">
                 <a href="https://www.google.com/maps" target="_blank" className="location-store flex items-center gap-1 transition sm:hover:text-white sm:hover:underline">
                     <FontAwesomeIcon icon={faLocationDot} />
-                    <p>Store Location: Lincoln- 344, Illinois, Chicago, USA</p>
+                    <p className="line-clamp-1">Store Location: Lincoln- 344, Illinois, Chicago, USA</p>
                 </a>
                 <div className="utils flex items-center gap-3 flex-wrap">
                     {/* Language Dropdown */}
