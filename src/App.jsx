@@ -6,9 +6,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "@pages/main/HomePage";
 import ShopPage from "@pages/main/ShopPage";
 import ProductDetailPage from "@pages/main/ProductDetailPage";
+import WishlistPage from "@pages/main/WishlistPage";
 import CartPage from "@pages/main/CartPage";
 import CheckoutPage from "@pages/main/CheckoutPage";
-import WishlistPage from "@pages/main/WishlistPage";
+import CheckoutSuccessPage from "@pages/main/CheckoutSuccessPage";
 // # Auth Pages
 import LoginPage from "@pages/auth/LoginPage";
 import SignupPage from "@pages/auth/SignupPage";
@@ -52,6 +53,7 @@ function App() {
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
 
           {/* Auth Pages */}
           <Route path="/auth">

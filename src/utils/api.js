@@ -104,3 +104,22 @@ export const UPDATE_MY_CART = async (jwt, updatedData) => {
         console.log(err);
     }
 };
+
+// Order:
+export const CREATE_ORDER = async (jwt, data) => {
+    console.log(data);
+
+    try {
+        const res = await fetch(`${api}/orders`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            },
+            body: JSON.stringify({ data })
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};

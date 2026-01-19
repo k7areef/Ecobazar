@@ -1,7 +1,6 @@
+import CartSummary from "@components/common/CartSummary";
 import Button from "@components/UI/Button";
 import { useCart } from "@contexts/CartContext";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 function CartPage() {
@@ -71,38 +70,7 @@ function CartPage() {
                     {/* Cart Total */}
                     <div className="cart-total border border-gray-100 rounded-md p-5 lg:row-span-3">
                         <h3 className="font-medium text-lg sm:text-xl md:text-2xl">Cart Total</h3>
-                        <div className="cart-summary mb-5">
-                            <div className="subtotal flex items-center justify-between text-lg py-2 border-b border-b-gray-100">
-                                <span className="text-gray-700">Subtotal:</span>
-                                {
-                                    isLoading ? (
-                                        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
-                                    ) : (
-                                        <span className="font-medium">${cart?.cart_total}</span>
-                                    )
-                                }
-                            </div>
-                            <div className="shipping flex items-center justify-between text-lg py-2 border-b border-b-gray-100">
-                                <span className="text-gray-700">Shipping:</span>
-                                {
-                                    isLoading ? (
-                                        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
-                                    ) : (
-                                        <span className="font-medium">Free</span>
-                                    )
-                                }
-                            </div>
-                            <div className="total flex items-center justify-between text-lg py-2 border-b border-b-gray-100">
-                                <span className="text-gray-700">Total:</span>
-                                {
-                                    isLoading ? (
-                                        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
-                                    ) : (
-                                        <span className="font-medium">${cart?.cart_total}</span>
-                                    )
-                                }
-                            </div>
-                        </div>
+                        <CartSummary className="mb-5" />
                         <Button
                             to={'/checkout'}
                             disabled={isLoading}

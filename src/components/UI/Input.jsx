@@ -2,7 +2,7 @@ import { ErrorMessage } from "formik";
 
 function Input({ label, ...input }) {
     return (
-        <div className="input">
+        <div className={`input ${input.className}`}>
             {
                 label &&
                 <label htmlFor={input.id} className="block mb-2 w-fit">

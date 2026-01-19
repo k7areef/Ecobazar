@@ -130,7 +130,7 @@ function BillingAddress() {
     const handleSubmit = React.useCallback(async (values, actions) => {
         const { setSubmitting } = actions;
         try {
-            const data = await UPDATE_MY_USER(jwt, user?.documentId, { billing_address: values });
+            const data = await UPDATE_MY_USER(jwt, user?.documentId, { billingAddress: values });
             if (data.error) {
                 console.log(data.error);
                 return;
