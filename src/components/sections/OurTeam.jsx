@@ -16,7 +16,7 @@ function OurTeam() {
                     description="Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi."
                     className="[&>div.text-container]:text-center [&>div.text-container>p]:max-w-150 justify-center"
                 />
-                <div className="team-slider flex items-center gap-5">
+                <div className="team-slider flex items-center gap-5 max-2xl:flex-wrap max-2xl:justify-center">
                     <IconButton
                         variant="white"
                         className="team-previous-indicator shrink-0"
@@ -24,7 +24,7 @@ function OurTeam() {
                         <span className="sr-only">Previous Slide</span>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </IconButton>
-                    <div className="slider-container w-full shrink-0">
+                    <div className="slider-container w-full max-2xl:-order-1">
                         <Swiper
                             modules={[Navigation]}
                             spaceBetween={20}
@@ -38,7 +38,7 @@ function OurTeam() {
                                 1024: {
                                     slidesPerView: 3
                                 },
-                                1280: {
+                                1440: {
                                     slidesPerView: 4
                                 }
                             }}
@@ -57,9 +57,9 @@ function OurTeam() {
                                                 <img
                                                     src={teamItem.image}
                                                     alt={teamItem.name}
-                                                    className="transition object-cover group-hover:scale-110 group-hover:grayscale-50 duration-500 ease-out"
+                                                    className="w-full transition object-cover sm:group-hover:scale-110 sm:group-hover:grayscale-50 duration-500 ease-out"
                                                 />
-                                                <div className="social-overlay absolute left-0 top-0 w-full h-full transition flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 duration-500 ease-out group-hover:*:scale-100">
+                                                <div className="social-overlay absolute left-0 top-0 w-full h-full transition flex items-center justify-center bg-black/50 opacity-0 sm:group-hover:opacity-100 duration-500 ease-out sm:group-hover:*:scale-100">
                                                     <SocialProfiles className="text-white transition scale-110 duration-500 ease-out" />
                                                 </div>
                                             </div>
