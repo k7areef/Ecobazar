@@ -24,7 +24,7 @@ function OurTeam() {
                         <span className="sr-only">Previous Slide</span>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </IconButton>
-                    <div className="slider-container w-full max-2xl:-order-1">
+                    <div className="slider-container w-full 2xl:w-[calc(100%-120px)] max-2xl:-order-1">
                         <Swiper
                             modules={[Navigation]}
                             spaceBetween={20}
@@ -51,7 +51,7 @@ function OurTeam() {
                                 TeamData.map((teamItem, index) => (
                                     <SwiperSlide key={index}>
                                         <div
-                                            className="team-card rounded-md overflow-hidden"
+                                            className="team-card rounded-md overflow-hidden bg-white transition sm:hover:shadow-lg/3"
                                         >
                                             <div className="image-container relative group overflow-hidden">
                                                 <img
