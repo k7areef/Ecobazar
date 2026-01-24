@@ -107,8 +107,6 @@ export const UPDATE_MY_CART = async (jwt, updatedData) => {
 
 // Order:
 export const CREATE_ORDER = async (jwt, data) => {
-    console.log(data);
-
     try {
         const res = await fetch(`${api}/orders`, {
             method: "POST",
@@ -117,6 +115,21 @@ export const CREATE_ORDER = async (jwt, data) => {
                 authorization: `Bearer ${jwt}`
             },
             body: JSON.stringify({ data })
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// Categories:
+export const GET_CATEGORIES = async (jwt, query) => {
+    try {
+        const res = await fetch(`${api}/categories${query}`, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${jwt}`
+            }
         });
         return await res.json();
     } catch (err) {
