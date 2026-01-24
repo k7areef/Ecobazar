@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Sarah Johnson",
+        "role": "Chief Executive Officer",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252231/2_lov3qk.png"
+    },
+    {
+        "name": "Michael Chen",
+        "role": "Lead Software Engineer",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252230/3_k2qgt6.png"
+    },
+    {
+        "name": "Amira Osman",
+        "role": "Senior UI/UX Designer",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252230/4_i1sdfc.png"
+    },
+    {
+        "name": "David Smith",
+        "role": "Product Manager",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252230/1_vhzai2.png"
+    },
+    {
+        "name": "Emily Rodriguez",
+        "role": "Marketing Director",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252231/2_lov3qk.png"
+    },
+    {
+        "name": "James Wilson",
+        "role": "Backend Developer",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252230/3_k2qgt6.png"
+    },
+    {
+        "name": "Laila Ahmed",
+        "role": "Creative Director",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252230/4_i1sdfc.png"
+    },
+    {
+        "name": "Robert Brown",
+        "role": "Data Analyst",
+        "image": "https://res.cloudinary.com/doeppovou/image/upload/v1769252230/1_vhzai2.png"
+    }
+]

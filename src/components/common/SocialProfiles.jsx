@@ -1,28 +1,37 @@
 import IconButton from "@components/UI/IconButton";
-import { faFacebook, faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faGithub, faInstagram, faPinterest } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const profiles = [
     {
         href: "https://www.facebook.com/k7areef/",
         icon: faFacebook,
-        name: "name"
+        name: "Facebook"
     },
     {
         href: "https://www.instagram.com/k7areef/",
         icon: faInstagram,
-        name: "name"
+        name: "Instagram"
     },
     {
         href: "https://www.github.com/k7areef/",
         icon: faGithub,
-        name: "name"
+        name: "Github"
+    },
+    {
+        href: "https://www.pinterest.com/kh3reef/",
+        icon: faPinterest,
+        name: "Pinterest"
     }
 ];
 
-function SocialProfiles() {
+/**
+ * @param {React.HTMLAttributes<HTMLElement>} props
+ */
+
+function SocialProfiles({ ...props }) {
     return (
-        <div className="social-profile flex items-center gap-0.5">
+        <div className={`social-profile flex items-center gap-0.5 ${props.className}`}>
             {
                 profiles.map((profile, index) => (<a
                     key={index}

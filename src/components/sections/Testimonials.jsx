@@ -17,16 +17,16 @@ function Testimonials() {
                     <div className="testimonials-indicators flex items-center gap-3">
                         <IconButton
                             type="button"
-                            className="testimonials-indicator-left"
+                            className="testimonials-previous-indicator"
                         >
                             <span className="sr-only">Previous</span>
                             <FontAwesomeIcon icon={faArrowLeft} />
                         </IconButton>
                         <IconButton
                             type="button"
-                            className="testimonials-indicator-right"
+                            className="testimonials-next-indicator"
                         >
-                            <span className="sr-only">Previous</span>
+                            <span className="sr-only">Next</span>
                             <FontAwesomeIcon icon={faArrowRight} />
                         </IconButton>
                     </div>
@@ -48,15 +48,14 @@ function Testimonials() {
                             }
                         }}
                         navigation={{
-                            nextEl: '.testimonials-indicator-right',
-                            prevEl: '.testimonials-indicator-left',
+                            nextEl: '.testimonials-next-indicator',
+                            prevEl: '.testimonials-previous-indicator',
                         }}
                     >
                         {
                             TestimonialsData.map((testimonial, index) => (
                                 <SwiperSlide key={index} className="h-auto!">
                                     <div
-                                        key={index}
                                         className="testimonial-card p-5 rounded-md bg-white shadow h-full flex flex-col gap-3"
                                     >
                                         <FontAwesomeIcon icon={faQuoteLeft} className="text-5xl text-primary/30" />
