@@ -1,3 +1,4 @@
+import IconButton from "@components/UI/IconButton";
 import { faFacebook, faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -27,10 +28,14 @@ function SocialProfiles() {
                     key={index}
                     target="_blank"
                     href={profile.href}
-                    className="text-2xl w-10 h-10 rounded-full sm:hover:bg-primary sm:hover:text-white flex items-center justify-center transition"
                 >
-                    <span className="sr-only">{profile.name}</span>
-                    <FontAwesomeIcon icon={profile.icon} />
+                    <IconButton
+                        type="button"
+                        variant="ghost"
+                    >
+                        <span className="sr-only">{profile.name}</span>
+                        <FontAwesomeIcon icon={profile.icon} className="text-xl" />
+                    </IconButton>
                 </a>))
             }
         </div>

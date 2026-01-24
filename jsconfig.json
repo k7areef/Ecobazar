@@ -10,6 +10,7 @@
       "@contexts/*": ["contexts/*"],
       "@configs/*": ["configs/*"],
       "@utils/*": ["utils/*"],
+      "@data/*": ["data/*"],
     }
   }
 }

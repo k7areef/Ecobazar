@@ -8,6 +8,8 @@ import { BrowserRouter } from 'react-router-dom'
 // App Contexts
 import AppContexts from '@contexts/AppContexts'
 import AppModals from '@modals/AppModals'
+// Swiper Css:
+import 'swiper/css';
 
 // Tanstack:
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

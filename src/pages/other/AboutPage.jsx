@@ -1,9 +1,9 @@
+import Testimonials from "@components/sections/Testimonials";
+
 function AboutPage() {
     return (
         <div className="about-page">
-            <div className="container">
-                About Page
-            </div>
+            <Testimonials />
         </div>
     )
 }

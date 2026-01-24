@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom";
+import Testimonials from "@components/sections/Testimonials";
 
 function HomePage() {
     return (
         <div className="home-page">
-            <div className="container">
-                Home Page
-                <Link to={'/auth/login'}>Login</Link>
-            </div>
+            <Testimonials />
         </div>
     )
 }
