@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  width: 100%;
+  max-width: 80rem;
+}
+
+@theme {
+  /* Colors */
+  --color-soft-primary: #84D187;
+  --color-primary: #00B207;
+  --color-hard-primary: #2C742F;
+  --color-warning: #FF8A00;
+  --color-danger: #EA4B48;
+  /* Grey Shades */
+  --color-grey-900: #191919;
+  --color-grey-800: #333333;
+  --color-grey-700: #4c4c4c;
+  --color-grey-600: #666666;
+  --color-grey-500: #7f7f7f;
+  --color-grey-400: #999999;
+  --color-grey-300: #b3b3b3;
+  --color-grey-200: #cccccc;
+  --color-grey-100: #e5e5e5;
+  --color-grey-50: #f2f2f2;
+  /* Green Gray Shades */
+  --color-green-grey-900: #052600;
+  --color-green-grey-800: #1c3b18;
+  --color-green-grey-700: #30572c;
+  --color-green-grey-600: #456b40;
+  --color-green-grey-500: #647f61;
+  --color-green-grey-400: #7d997b;
+  --color-green-grey-300: #99b296;
+  --color-green-grey-200: #b5ccb3;
+  --color-green-grey-100: #dbe5da;
+  --color-green-grey-50: #edf2ee;
+  /* Modal Background */
+  --color-modal-bg: rgba(0, 0, 0, 0.6);
+}
+
+/* Global */
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+
+button {
+  cursor: pointer;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+p {
+  font-size: 14px;
+  color: var(--color-grey-500);
+}
