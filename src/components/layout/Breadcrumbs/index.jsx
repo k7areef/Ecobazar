@@ -21,7 +21,7 @@ function Breadcrumbs() {
                 alt="breadcrumbs"
                 className="w-full h-full object-cover"
             />
-            <div className="container absolute z-1 left-0 top-1/2 -translate-y-1/2 flex items-center gap-2">
+            <div className="container absolute z-1 left-1/2 top-1/2 -translate-1/2 flex items-center gap-2">
                 {/* Home */}
                 <Link
                     to={'/'}
