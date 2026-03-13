@@ -28,8 +28,6 @@ function HomePage() {
             </main>
             {/* News Letter Modal */}
             <NewsLetterModal />
-            {/* Cart Drawer */}
-            <CartDrawer />
         </div>
     )
 }

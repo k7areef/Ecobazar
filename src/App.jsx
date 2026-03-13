@@ -29,6 +29,8 @@ import Header from "@components/layout/Header";
 import Breadcrumbs from "@components/layout/Breadcrumbs";
 import Subscribe from "@components/layout/Subscribe";
 import Footer from "@components/layout/Footer";
+// Modals:
+import CartDrawer from "@components/layout/CartDrawer";
 
 function App() {
   return (
@@ -69,6 +71,8 @@ function App() {
       <Subscribe />
       {/* Footer */}
       <Footer />
+      {/* Cart Drawer */}
+      <CartDrawer />
     </div>
   )
 }
