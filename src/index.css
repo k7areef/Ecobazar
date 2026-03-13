@@ -60,6 +60,9 @@ button:focus {
 p,
 textarea::placeholder,
 input::placeholder {
-  font-size: 14px;
   color: var(--color-grey-500);
+}
+
+p {
+  font-size: 14px;
 }

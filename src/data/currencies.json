@@ -1,0 +1,20 @@
+[
+  {
+    "value": "USD",
+    "short": "USD",
+    "code": "USD",
+    "symbol": "usd"
+  },
+  {
+    "value": "EUR",
+    "short": "EUR",
+    "code": "EUR",
+    "symbol": "eur"
+  },
+  {
+    "value": "EGP",
+    "short": "EGP",
+    "code": "EGP",
+    "symbol": "egp"
+  }
+]

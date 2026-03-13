@@ -1,0 +1,26 @@
+[
+  {
+    "value": "English",
+    "short": "Eng",
+    "code": "en",
+    "flag": "unitedStates"
+  },
+  {
+    "value": "Spanish",
+    "short": "Esp",
+    "code": "es",
+    "flag": "spain"
+  },
+  {
+    "value": "France",
+    "short": "Fr",
+    "code": "fr",
+    "flag": "france"
+  },
+  {
+    "value": "Arabic",
+    "short": "Ar",
+    "code": "ar",
+    "flag": "egypt"
+  }
+]
