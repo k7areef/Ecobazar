@@ -1,0 +1,102 @@
+[
+  {
+    "label": "My Account",
+    "links": [
+      {
+        "id": 1,
+        "to": "/",
+        "label": "My Account"
+      },
+      {
+        "id": 2,
+        "to": "/",
+        "label": "Order History"
+      },
+      {
+        "id": 3,
+        "to": "/",
+        "label": "Shopping Cart"
+      },
+      {
+        "id": 4,
+        "to": "/",
+        "label": "Wishlist"
+      }
+    ]
+  },
+  {
+    "label": "Helps",
+    "links": [
+      {
+        "id": 1,
+        "to": "/",
+        "label": "Contact"
+      },
+      {
+        "id": 2,
+        "to": "/",
+        "label": "Faqs"
+      },
+      {
+        "id": 3,
+        "to": "/",
+        "label": "Terms & Condition"
+      },
+      {
+        "id": 4,
+        "to": "/",
+        "label": "Privacy Policy"
+      }
+    ]
+  },
+  {
+    "label": "Proxy",
+    "links": [
+      {
+        "id": 1,
+        "to": "/",
+        "label": "About"
+      },
+      {
+        "id": 2,
+        "to": "/",
+        "label": "Shop"
+      },
+      {
+        "id": 3,
+        "to": "/",
+        "label": "Product"
+      },
+      {
+        "id": 4,
+        "to": "/",
+        "label": "Track Order"
+      }
+    ]
+  },
+  {
+    "label": "Categories",
+    "links": [
+      {
+        "id": 1,
+        "to": "/",
+        "label": "Fruit & Vegetables"
+      },
+      {
+        "id": 2,
+        "to": "/",
+        "label": "Meat & Fish"
+      },
+      {
+        "id": 3,
+        "to": "/",
+        "label": "Bread & Bakery"
+      },
+      {
+        "id": 4,
+        "to": "/",
+        "label": "Beauty & Health"
+      }
+    ]
+  }
+]
