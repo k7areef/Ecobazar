@@ -1,11 +1,11 @@
-function Nav() {
+function NavBar() {
     return (
         <nav>
             <div className="container">
-                Nav
+                NavBar
             </div>
         </nav>
     )
 }
 
-export default Nav;
+export default NavBar;

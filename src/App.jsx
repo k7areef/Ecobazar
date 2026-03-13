@@ -26,6 +26,7 @@ import FaqsPage from "@pages/other/FaqsPage";
 import NotFoundPage from "@pages/other/NotFoundPage";
 // Common Components:
 import Header from "@components/layout/Header";
+import Breadcrumbs from "@components/layout/Breadcrumbs";
 import Subscribe from "@components/layout/Subscribe";
 import Footer from "@components/layout/Footer";
 
@@ -34,6 +35,8 @@ function App() {
     <div className="App text-grey-900 min-h-screen">
       {/* Header */}
       <Header />
+      {/* Breadcrumbs */}
+      <Breadcrumbs />
       {/* Routes */}
       <Routes>
         {/* Main */}

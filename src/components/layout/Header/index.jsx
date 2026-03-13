@@ -1,13 +1,13 @@
-import Banner from "./components/Banner";
-import Breadcrumbs from "./components/Breadcrumbs";
-import Nav from "./components/Nav";
+import TopBar from "./components/TopBar";
+import MiddleBar from "./components/MiddleBar";
+import NavBar from "./components/NavBar";
 
 function Header() {
     return (
         <header>
-            <Banner />
-            <Nav />
-            <Breadcrumbs />
+            <TopBar />
+            <MiddleBar />
+            <NavBar />
         </header>
     )
 }
