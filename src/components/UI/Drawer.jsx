@@ -27,10 +27,7 @@ function Drawer({ isOpen, closeDrawer, children }) {
     return (
         createPortal(
             <div
-                onClick={() => {
-                    console.log('clicked');
-                    closeDrawer();
-                }}
+                onClick={closeDrawer}
                 className="drawer h-screen w-full bg-modal-bg backdrop-blur-xs absolute z-1 top-0 left-0"
             >
                 {children}

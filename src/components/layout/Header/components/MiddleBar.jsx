@@ -46,6 +46,22 @@ function MiddleBar() {
                 </div>
                 {/* Utils */}
                 <div className="utiles flex items-center gap-3">
+                    {/* Search */}
+                    <div className="search-button-wrapper lg:hidden flex items-center gap-2">
+                        {/* Search Button */}
+                        <button
+                            type="button"
+                            title={openSearch ? "Close Search" : "Open Search"}
+                            aria-label={openSearch ? "Close Search" : "Open Search"}
+                            onClick={() => setOpenSearch(prev => !prev)}
+                            className={`text-2xl transition duration-200 ease-out ${openSearch ? "text-primary" : "sm:hover:text-primary"}`}
+                        >
+                            <FontAwesomeIcon icon={openSearch ? faMagnifyingGlassArrowRight : faSearch} />
+                            <span className="sr-only">{openSearch ? "Close Search" : "Open Search"}</span>
+                        </button>
+                        {/* Separator */}
+                        <span className="w-0.5 h-6 bg-grey-100" />
+                    </div>
                     {/* Wishlist */}
                     <Link
                         to={'/wishlist'}
@@ -65,25 +81,14 @@ function MiddleBar() {
                     >
                         {/* Icon */}
                         <div className="icon-container relative">
-                            <div className="cart-items-count bg-hard-primary text-white w-6 h-6 rounded-full flex items-center justify-center absolute z-1 top-0 right-0 translate-x-2.5 -translate-y-4">{5}</div>
+                            <div className="cart-products-count bg-hard-primary text-white w-6 h-6 rounded-full flex items-center justify-center absolute z-1 top-0 right-0 translate-x-2.5 -translate-y-4">{5}</div>
                             <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
                         </div>
                         {/* Cart Info */}
-                        <div className="cart-info text-start">
+                        <div className="cart-info text-start max-sm:hidden">
                             <span className="text-grey-700">Shopping cart:</span>
                             <h3 className="mt-0.5 font-semibold text-lg">${10}.00</h3>
                         </div>
-                    </button>
-                    {/* Search Button */}
-                    <button
-                        type="button"
-                        title={openSearch ? "Close Search" : "Open Search"}
-                        aria-label={openSearch ? "Close Search" : "Open Search"}
-                        onClick={() => setOpenSearch(prev => !prev)}
-                        className={`text-2xl transition duration-200 ease-out lg:hidden ${openSearch ? "text-primary" : "sm:hover:text-primary"}`}
-                    >
-                        <FontAwesomeIcon icon={openSearch ? faMagnifyingGlassArrowRight : faSearch} />
-                        <span className="sr-only">{openSearch ? "Close Search" : "Open Search"}</span>
                     </button>
                 </div>
             </div>

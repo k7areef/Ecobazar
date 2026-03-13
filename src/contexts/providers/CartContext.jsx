@@ -5,6 +5,17 @@ const CartContext = React.createContext()
 export const CartProvider = ({ children }) => {
 
     const [isOpen, setIsOpen] = React.useState(false);
+    const [cart, setCart] = React.useState({
+        items: [],
+        total: 0
+    });
+
+    React.useEffect(() => {
+        setCart({
+            items: [],
+            total: 0
+        })
+    }, []);
 
     const toggleDrawer = React.useCallback(() => setIsOpen(!isOpen), [isOpen]);
     const closeDrawer = React.useCallback(() => setIsOpen(false), []);
@@ -12,6 +23,7 @@ export const CartProvider = ({ children }) => {
     return (
         <CartContext.Provider value={{
             isOpen,
+            cart,
             toggleDrawer,
             closeDrawer
         }}>
