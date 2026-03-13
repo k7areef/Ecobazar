@@ -57,7 +57,9 @@ button:focus {
   outline: none;
 }
 
-p {
+p,
+textarea::placeholder,
+input::placeholder {
   font-size: 14px;
   color: var(--color-grey-500);
 }
