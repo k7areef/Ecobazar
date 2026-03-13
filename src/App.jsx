@@ -18,7 +18,7 @@ import OrdersHistoryPage from "@pages/dashboard/OrdersHistoryPage";
 import OrderHistoryDetailsPage from "@pages/dashboard/OrderHistoryDetailsPage";
 import SettingsPage from "@pages/dashboard/SettingsPage";
 // Other
-import BlogsPage from "@pages/other/BlogsPage";
+import BlogPage from "@pages/other/BlogPage";
 import BlogDetailsPage from "@pages/other/BlogDetailsPage";
 import AboutPage from "@pages/other/AboutPage";
 import ContactPage from "@pages/other/ContactPage";
@@ -57,7 +57,7 @@ function App() {
         <Route path="/dashboard/orders-history/:id" element={<OrderHistoryDetailsPage />} />
         <Route path="/dashboard/settings" element={<SettingsPage />} />
         {/* Other */}
-        <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/blogs/:id" element={<BlogDetailsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />

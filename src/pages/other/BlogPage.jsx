@@ -1,12 +1,12 @@
 import useChangeTitle from "@hooks/useChangeTitle";
 
-function BlogsPage() {
+function BlogPage() {
     useChangeTitle({ title: 'Blogs' });
     return (
-        <div className="blogs-page">
-            BlogsPage
+        <div className="blog-page">
+            BlogPage
         </div>
     )
 }
 
-export default BlogsPage;
+export default BlogPage;

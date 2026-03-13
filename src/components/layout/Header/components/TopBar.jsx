@@ -33,7 +33,7 @@ function TopBar() {
 
     return (
         <div className="top-bar bg-grey-800 text-grey-300 py-5">
-            <div className="container flex items-center justify-between max-lg:flex-col gap-3">
+            <div className="container flex items-center justify-between max-md:flex-col gap-3">
                 {/* Location */}
                 <a
                     target="_blank"
