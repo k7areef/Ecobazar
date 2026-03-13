@@ -1,10 +1,15 @@
+import React from "react";
 import AppLogo from "@components/common/AppLogo";
 import Button from "@components/UI/Button";
-import { faMagnifyingGlassArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faCartShopping, faMagnifyingGlassArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "@contexts/providers/CartContext";
 
 function MiddleBar() {
+
+    const { toggleDrawer } = useCart()
 
     const [openSearch, setOpenSearch] = React.useState(false);
 
@@ -42,7 +47,33 @@ function MiddleBar() {
                 {/* Utils */}
                 <div className="utiles flex items-center gap-3">
                     {/* Wishlist */}
+                    <Link
+                        to={'/wishlist'}
+                        className="text-2xl transition duration-200 ease-out sm:hover:text-primary"
+                    >
+                        <FontAwesomeIcon icon={faHeart} />
+                    </Link>
+                    {/* Separator */}
+                    <span className="w-0.5 h-6 bg-grey-100" />
                     {/* Cart */}
+                    <button
+                        type="button"
+                        title="Open Cart"
+                        aria-label="Open Cart"
+                        onClick={toggleDrawer}
+                        className="flex items-center gap-6"
+                    >
+                        {/* Icon */}
+                        <div className="icon-container relative">
+                            <div className="cart-items-count bg-hard-primary text-white w-6 h-6 rounded-full flex items-center justify-center absolute z-1 top-0 right-0 translate-x-2.5 -translate-y-4">{5}</div>
+                            <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
+                        </div>
+                        {/* Cart Info */}
+                        <div className="cart-info text-start">
+                            <span className="text-grey-700">Shopping cart:</span>
+                            <h3 className="mt-0.5 font-semibold text-lg">${10}.00</h3>
+                        </div>
+                    </button>
                     {/* Search Button */}
                     <button
                         type="button"

@@ -1,6 +1,7 @@
 /**
  * @typedef {Object} DrawerProps
  * @prop {boolean} isOpen
+ * @prop {Function} closeDrawer
  * @prop {string} [dir]
  */
 
@@ -11,7 +12,7 @@ import { createPortal } from "react-dom";
  * @param {DrawerProps} props
  */
 
-function Drawer({ isOpen, children }) {
+function Drawer({ isOpen, closeDrawer, children }) {
 
     React.useEffect(() => {
         if (isOpen) {
@@ -25,7 +26,13 @@ function Drawer({ isOpen, children }) {
 
     return (
         createPortal(
-            <div className="drawer h-screen w-full bg-modal-bg backdrop-blur-xs absolute z-1 top-0 left-0">
+            <div
+                onClick={() => {
+                    console.log('clicked');
+                    closeDrawer();
+                }}
+                className="drawer h-screen w-full bg-modal-bg backdrop-blur-xs absolute z-1 top-0 left-0"
+            >
                 {children}
             </div>,
             document.getElementById('modal-root')

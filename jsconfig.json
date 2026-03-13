@@ -8,6 +8,7 @@
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@data/*": ["data/*"],
+      "@contexts/*": ["contexts/*"],
     }
   }
 }
