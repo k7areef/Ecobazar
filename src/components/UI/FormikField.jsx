@@ -20,7 +20,7 @@ const iconsmap = {
     location: faLocationDot
 }
 
-function FormikField({ typeField, label, icon, mainClassName, ...props }) {
+function FormikField({ typeField = "input", label, icon, mainClassName, ...props }) {
 
     const sharedStyles = `w-full p-3 bg-white border border-grey-100 placeholder:text-grey-600 rounded-md transition duration-300 ease-in-out read-only:border-transparent not-read-only:focus:border-purple-60`;
 

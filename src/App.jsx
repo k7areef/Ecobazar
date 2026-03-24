@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 // Pages:
 // Main
 import HomePage from "@pages/main/HomePage";
@@ -73,6 +74,8 @@ function App() {
       <Footer />
       {/* Cart Drawer */}
       <CartDrawer />
+      {/* Toaster */}
+      <Toaster />
     </div>
   )
 }
