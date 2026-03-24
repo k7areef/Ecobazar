@@ -58,3 +58,12 @@ export const GET_USER_PROFILE = async () => {
         console.log(err);
     }
 };
+
+// User
+export const UPDATE_USER = async (values) => {
+    try {
+        return await supabase.auth.updateUser(values)
+    } catch (err) {
+        console.log(err);
+    }
+};

@@ -10,10 +10,18 @@ import Button from '@components/UI/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import FormikField from '@components/UI/FormikField';
-import { supabase } from '@utils/supabaseClient';
 import toast from 'react-hot-toast';
+import { UPDATE_USER } from '@utils/api';
 
 const fields = [
+    {
+        id: "current_password",
+        name: "current_password",
+        type: "password",
+        label: "Current Password",
+        placeholder: "Enter your current password",
+        mainClassName: "lg:col-span-2"
+    },
     {
         id: "new_password",
         name: "new_password",
@@ -30,10 +38,12 @@ const fields = [
     }
 ]
 const initialValues = {
+    current_password: '',
     new_password: '',
     confirm_password: '',
 }
 const validationSchema = Yup.object({
+    current_password: Yup.string().required('Current password is required'),
     new_password: Yup.string().required('New password is required').min(6, 'Password must be at least 6 characters'),
     confirm_password: Yup.string().oneOf([Yup.ref('new_password'), null], 'Passwords must match')
 });
@@ -48,10 +58,11 @@ function ChangePassword({ className }) {
         const { setSubmitting, resetForm } = actions;
         setSubmitting(true);
         try {
-            const { error: updateError } = await supabase.auth.updateUser({
+            const { error } = await UPDATE_USER({
+                current_password: values.current_password,
                 password: values.new_password
-            })
-            if (updateError) throw updateError;
+            });
+            if (error) throw error;
             toast.success("Password updated successfully");
             resetForm();
         } catch (err) {
