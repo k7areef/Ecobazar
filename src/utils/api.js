@@ -29,6 +29,7 @@ export const GET_PRODUCTS = async ({ limit }) => {
         console.log(err);
     }
 };
+
 // Categories
 export const GET_CATEGORIES = async ({ limit, byImage = false }) => {
     try {
@@ -40,6 +41,17 @@ export const GET_CATEGORIES = async ({ limit, byImage = false }) => {
             query = query.not("image_url", "is", null);
         }
         const response = await query;
+        if (response.error) throw new Error(response.error.message);
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// User Profile
+export const GET_USER_PROFILE = async () => {
+    try {
+        const response = await supabase.from("profiles").select("*").single();
         if (response.error) throw new Error(response.error.message);
         return response;
     } catch (err) {
