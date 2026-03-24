@@ -9,6 +9,7 @@
       "@utils/*": ["utils/*"],
       "@data/*": ["data/*"],
       "@contexts/*": ["contexts/*"],
+      "@layouts/*": ["layouts/*"],
     }
   }
 }

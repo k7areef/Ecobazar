@@ -23,6 +23,7 @@ export default defineConfig({
       '@utils': path.resolve(__dirname, './src/utils'),
       '@data': path.resolve(__dirname, './src/data'),
       '@contexts': path.resolve(__dirname, './src/contexts'),
+      '@layouts': path.resolve(__dirname, './src/layouts'),
     },
   },
 })

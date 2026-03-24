@@ -81,7 +81,7 @@ function TopBar() {
                             </div>
                         ) : isAuth ? (
                             <div className="welcome-user">
-                                <Link to={'/profile'} className="sm:hover:underline sm:hover:text-white transition-colors duration-200">
+                                <Link to={'/dashboard'} className="sm:hover:underline sm:hover:text-white transition-colors duration-200">
                                     {
                                         (user.first_name) ? (
                                             <div className="user-name">

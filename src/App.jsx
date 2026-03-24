@@ -32,6 +32,8 @@ import Subscribe from "@components/layout/Subscribe";
 import Footer from "@components/layout/Footer";
 // Modals:
 import CartDrawer from "@components/layout/CartDrawer";
+// Layouts:
+import DashboardLayout from "@layouts/DashboardLayout";
 
 function App() {
   return (
@@ -55,10 +57,12 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         {/* Dashboard */}
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/dashboard/orders-history" element={<OrdersHistoryPage />} />
-        <Route path="/dashboard/orders-history/:id" element={<OrderHistoryDetailsPage />} />
-        <Route path="/dashboard/settings" element={<SettingsPage />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="orders-history" element={<OrdersHistoryPage />} />
+          <Route path="orders-history/:id" element={<OrderHistoryDetailsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
         {/* Other */}
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blogs/:id" element={<BlogDetailsPage />} />
