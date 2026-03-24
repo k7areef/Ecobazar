@@ -11,9 +11,9 @@ import Button from '@components/UI/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import FormikField from '@components/UI/FormikField';
-import { supabase } from '@utils/supabaseClient';
 import toast from 'react-hot-toast';
 import DefaultAvatar from '@assets/images/default-avatar.png';
+import { UPDATE_USER_PROFILE } from '@utils/api';
 
 const fields = [
     {
@@ -82,7 +82,7 @@ function AccountSettings({ className }) {
         const { setSubmitting, resetForm } = actions;
         setSubmitting(true);
         try {
-            const { error } = await supabase.from("profiles").update(values).eq("id", profile.id)
+            const { error } = await UPDATE_USER_PROFILE({ values, profileId: profile.id });
             if (error) throw error;
             toast.success("Profile updated successfully");
             setProfile(prev => ({ ...prev, ...values }));

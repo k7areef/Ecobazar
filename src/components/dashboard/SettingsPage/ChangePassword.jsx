@@ -59,8 +59,10 @@ function ChangePassword({ className }) {
         setSubmitting(true);
         try {
             const { error } = await UPDATE_USER({
-                current_password: values.current_password,
-                password: values.new_password
+                values: {
+                    current_password: values.current_password,
+                    password: values.new_password
+                }
             });
             if (error) throw error;
             toast.success("Password updated successfully");

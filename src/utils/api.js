@@ -58,9 +58,16 @@ export const GET_USER_PROFILE = async () => {
         console.log(err);
     }
 };
+export const UPDATE_USER_PROFILE = async ({ values, profileId }) => {
+    try {
+        return await supabase.from("profiles").update(values).eq("id", profileId)
+    } catch (err) {
+        console.log(err);
+    }
+};
 
 // User
-export const UPDATE_USER = async (values) => {
+export const UPDATE_USER = async ({ values }) => {
     try {
         return await supabase.auth.updateUser(values)
     } catch (err) {
