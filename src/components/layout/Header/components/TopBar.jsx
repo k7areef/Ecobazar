@@ -1,6 +1,6 @@
 import React from "react";
 import Dropdown from "@components/UI/Dropdown";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Languages from "@data/languages.json";
 import Currencies from "@data/currencies.json";
@@ -12,6 +12,7 @@ import USDCurrency from "@assets/images/currencies/usd.png";
 import EURCurrency from "@assets/images/currencies/eur.png";
 import EGPCurrency from "@assets/images/currencies/egp.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "@contexts/providers/AuthContext";
 
 const flagsMaper = {
     unitedStates: UnitedStatesFlag,
@@ -30,6 +31,7 @@ function TopBar() {
 
     const [languageSelected, setLanguageSelected] = React.useState("en");
     const [currencySelected, setCurrencySelected] = React.useState("USD");
+    const { isAuth, user, authLoading } = useAuth();
 
     return (
         <div className="top-bar bg-grey-800 text-grey-300 py-5">
@@ -71,15 +73,41 @@ function TopBar() {
                     {/* Separator */}
                     <span>|</span>
                     {/* My Account / Auth */}
-                    <div className="auth flex items-center gap-2 [&>a]:font-medium [&>a]:transition [&>a]:sm:hover:text-primary">
-                        <Link
-                            to={'/login'}
-                        >Login</Link>
-                        <span>/</span>
-                        <Link
-                            to={'/signup'}
-                        >Signup</Link>
-                    </div>
+                    {
+                        authLoading ? (
+                            <div className="auth-loading flex items-center gap-2">
+                                <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+                                <span>Loading...</span>
+                            </div>
+                        ) : isAuth ? (
+                            <div className="welcome-user">
+                                <Link to={'/profile'} className="sm:hover:underline sm:hover:text-white transition-colors duration-200">
+                                    {
+                                        (user.first_name) ? (
+                                            <div className="user-name">
+                                                {user.first_name}
+                                                {user.last_name ? " " + user.last_name : ""}
+                                            </div>
+                                        ) : (
+                                            <div className="user-name">
+                                                {user.email}
+                                            </div>
+                                        )
+                                    }
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="auth flex items-center gap-2 [&>a]:font-medium [&>a]:transition [&>a]:sm:hover:text-primary">
+                                <Link
+                                    to={'/login'}
+                                >Login</Link>
+                                <span>/</span>
+                                <Link
+                                    to={'/signup'}
+                                >Signup</Link>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>

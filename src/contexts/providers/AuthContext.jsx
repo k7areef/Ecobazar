@@ -5,12 +5,12 @@ const AuthContext = React.createContext();
 
 export const AuthContextProvider = ({ children }) => {
 
-    const [isAuth, setIsAuth] = React.useState(false);
+    const [user, setUser] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            setIsAuth(!!session?.user);
+            setUser(session?.user ?? null);
             setLoading(false);
         });
 
@@ -21,8 +21,9 @@ export const AuthContextProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{
-            isAuth,
-            loading
+            isAuth: !!user,
+            user: user,
+            authLoading: loading
         }}>
             {children}
         </AuthContext.Provider>
