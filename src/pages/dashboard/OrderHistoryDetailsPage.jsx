@@ -1,4 +1,4 @@
-import OrderHistoryDetails from "@components/dashboard/OrderHistoryDetails";
+import OrderHistoryDetails from "@components/dashboard/OrderHistoryPage/OrderHistoryDetails";
 import useChangeTitle from "@hooks/useChangeTitle";
 import { useParams } from "react-router-dom";
 

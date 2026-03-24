@@ -1,6 +1,6 @@
-import RecentOrderHistory from "@components/dashboard/RecentOrderHistory";
-import UserAddress from "@components/dashboard/UserAddress";
-import UserAvatar from "@components/dashboard/UserAvatar";
+import RecentOrderHistory from "@components/dashboard/DashboardPage/RecentOrderHistory";
+import UserAddress from "@components/dashboard/DashboardPage/UserAddress";
+import UserAvatar from "@components/dashboard/DashboardPage/UserAvatar";
 import useChangeTitle from "@hooks/useChangeTitle";
 
 function DashboardPage() {

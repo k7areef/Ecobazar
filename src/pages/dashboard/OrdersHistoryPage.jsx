@@ -1,4 +1,4 @@
-import OrderHistory from "@components/dashboard/OrderHistory";
+import OrderHistory from "@components/dashboard/OrderHistoryPage/OrderHistory";
 import useChangeTitle from "@hooks/useChangeTitle";
 
 function OrdersHistoryPage() {

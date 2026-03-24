@@ -1,6 +1,6 @@
-import AccountSettings from "@components/dashboard/AccountSettings";
-import BillingAddress from "@components/dashboard/BillingAddress";
-import ChangePassword from "@components/dashboard/ChangePassword";
+import AccountSettings from "@components/dashboard/SettingsPage/AccountSettings";
+import BillingAddress from "@components/dashboard/SettingsPage/BillingAddress";
+import ChangePassword from "@components/dashboard/SettingsPage/ChangePassword";
 import useChangeTitle from "@hooks/useChangeTitle";
 
 function SettingsPage() {
