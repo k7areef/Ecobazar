@@ -6,7 +6,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const links = [
     { to: "/dashboard", label: "Dashboard", icon: faDashboard },
     { to: "/dashboard/orders-history", label: "Order History", icon: faRotate },
-    { to: "/whishlist", label: "Wishlist", icon: faHeart },
+    { to: "/wishlist", label: "Wishlist", icon: faHeart },
     { to: "/cart", label: "Shopping Cart", icon: faShoppingBag },
     { to: "/dashboard/settings", label: "Settings", icon: faGear },
 ]
