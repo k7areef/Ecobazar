@@ -1,9 +1,13 @@
 import { supabase } from "./supabaseClient";
 
 // Testimonials
-export const GET_TESTIMONIALS = async () => {
+export const GET_TESTIMONIALS = async ({ limit }) => {
     try {
-        const response = await supabase.from("testimonials").select("*");
+        let query = supabase.from("testimonials").select("*");
+        if (limit) {
+            query = query.limit(limit);
+        }
+        const response = await query;
         if (response.error) throw new Error(response.error.message);
         return response;
     } catch (err) {

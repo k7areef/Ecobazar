@@ -10,9 +10,11 @@ import TestimonialCardSkeleton from "@components/testimonials/TestimonialCardSke
 
 function Testimonials() {
 
+    const LIMIT = 6;
+
     const { data, isLoading } = useQuery({
         queryKey: ['testimonials'],
-        queryFn: () => GET_TESTIMONIALS().then(res => res.data),
+        queryFn: () => GET_TESTIMONIALS({ limit: LIMIT }).then(res => res.data),
         refetchOnWindowFocus: false
     });
 
@@ -78,7 +80,7 @@ function Testimonials() {
                     >
                         {
                             isLoading ? (
-                                Array.from({ length: 3 }).map((_, index) => (<SwiperSlide key={index}>
+                                Array.from({ length: LIMIT }).map((_, index) => (<SwiperSlide key={index}>
                                     <TestimonialCardSkeleton />
                                 </SwiperSlide>))
                             ) : (
