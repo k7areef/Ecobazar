@@ -17,14 +17,14 @@ function HeroSection() {
                 {/* Content */}
                 <div className="content">
                     <span className="text-primary uppercase font-medium">Welcome to Ecobazar</span>
-                    <h1 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-tight mt-2">Fresh & Healthy <br /> Organic Food</h1>
+                    <h1 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-tight mt-2">Fresh & Healthy <br className="max-sm:hidden" /> Organic Food</h1>
                     <h2 className="mt-5 text-lg sm:text-xl">Sale up to <span className="text-warning font-semibold">30% OFF</span></h2>
                     <p className="mt-2">Free shipping on all your order. we deliver, you enjoy</p>
                     <Button
                         to={'/shop'}
                         title="Shop Now"
                         aria-label="Shop Now"
-                        className="flex items-center gap-3 rounded-full w-fit mt-5"
+                        className="flex items-center justify-center gap-3 rounded-full w-fit mt-5 max-sm:w-full"
                     >
                         <span>Shop Now</span>
                         <FontAwesomeIcon icon={faArrowRight} />
