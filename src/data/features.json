@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "icon": "fastShipping",
+    "name": "Free Shipping",
+    "description": "Free shipping with discount"
+  },
+  {
+    "id": 2,
+    "icon": "greatSupport",
+    "name": "Great Support 24/7",
+    "description": "Instant access to Contact"
+  },
+  {
+    "id": 3,
+    "icon": "securePaymanet",
+    "name": "100% Sucure Payment",
+    "description": "We ensure your money is save"
+  },
+  {
+    "id": 4,
+    "icon": "monyBack",
+    "name": "Money-Back Guarantee",
+    "description": "30 days money-back"
+  }
+]
