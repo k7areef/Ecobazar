@@ -13,6 +13,7 @@ import EURCurrency from "@assets/images/currencies/eur.png";
 import EGPCurrency from "@assets/images/currencies/egp.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "@contexts/providers/AuthContext";
+import { useProfile } from "@contexts/providers/UserProfileContext";
 
 const flagsMaper = {
     unitedStates: UnitedStatesFlag,
@@ -31,7 +32,8 @@ function TopBar() {
 
     const [languageSelected, setLanguageSelected] = React.useState("en");
     const [currencySelected, setCurrencySelected] = React.useState("USD");
-    const { isAuth, user, authLoading } = useAuth();
+    const { isAuth } = useAuth();
+    const { loading, profile } = useProfile();
 
     return (
         <div className="top-bar bg-grey-800 text-grey-300 py-5">
@@ -74,7 +76,7 @@ function TopBar() {
                     <span>|</span>
                     {/* My Account / Auth */}
                     {
-                        authLoading ? (
+                        loading ? (
                             <div className="auth-loading flex items-center gap-2">
                                 <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
                                 <span>Loading...</span>
@@ -83,14 +85,14 @@ function TopBar() {
                             <div className="welcome-user">
                                 <Link to={'/dashboard'} className="sm:hover:underline sm:hover:text-white transition-colors duration-200">
                                     {
-                                        (user.first_name) ? (
+                                        (profile.first_name) ? (
                                             <div className="user-name">
-                                                {user.first_name}
-                                                {user.last_name ? " " + user.last_name : ""}
+                                                {profile.first_name}
+                                                {profile.last_name ? " " + profile.last_name : ""}
                                             </div>
                                         ) : (
-                                            <div className="user-name">
-                                                {user.email}
+                                            <div className="user-email">
+                                                {profile.email}
                                             </div>
                                         )
                                     }

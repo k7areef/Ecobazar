@@ -9,7 +9,7 @@ export const UserProfileContextProvider = ({ children }) => {
     const { isAuth, authLoading } = useAuth();
 
     const [profile, setProfile] = React.useState(null);
-    const [loading, setLoading] = React.useState(authLoading);
+    const [loading, setLoading] = React.useState(authLoading || !profile);
 
     React.useEffect(() => {
         if (!isAuth) return;
@@ -28,3 +28,6 @@ export const UserProfileContextProvider = ({ children }) => {
         </UserProfileContext.Provider>
     )
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useProfile = () => React.useContext(UserProfileContext);
