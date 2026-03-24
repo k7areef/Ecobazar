@@ -77,7 +77,7 @@ function Testimonials() {
                         navigation={navigation}
                     >
                         {
-                            !isLoading ? (
+                            isLoading ? (
                                 Array.from({ length: 3 }).map((_, index) => (<SwiperSlide key={index}>
                                     <TestimonialCardSkeleton />
                                 </SwiperSlide>))
