@@ -25,3 +25,20 @@ export const GET_PRODUCTS = async ({ limit }) => {
         console.log(err);
     }
 };
+// Categories
+export const GET_CATEGORIES = async ({ limit, byImage = false }) => {
+    try {
+        let query = supabase.from("categories").select("*").limit(limit);
+        if (limit) {
+            query = query.limit(limit);
+        }
+        if (byImage) {
+            query = query.not("image_url", "is", null);
+        }
+        const response = await query;
+        if (response.error) throw new Error(response.error.message);
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
+};
