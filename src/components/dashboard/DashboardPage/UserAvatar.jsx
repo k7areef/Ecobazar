@@ -46,7 +46,7 @@ function UserAvatar({ className }) {
                             <span>Loading...</span>
                         </div>
                     ) : (
-                        profile.full_name || "User Name"
+                        profile?.first_name + " " + profile?.last_name || "User Name"
                     )
                 }
             </h3>
