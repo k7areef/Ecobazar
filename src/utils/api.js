@@ -66,6 +66,22 @@ export const UPDATE_USER_PROFILE = async ({ values, profileId }) => {
     }
 };
 
+// User Billing Address
+export const GET_USER_BILLING_ADDRESS = async () => {
+    try {
+        return await supabase.from("addresses").select("*").single();
+    } catch (err) {
+        console.log(err);
+    }
+};
+export const UPDATE_USER_BILLING_ADDRESS = async ({ values, billingAddressId }) => {
+    try {
+        return await supabase.from("addresses").update(values).eq("id", billingAddressId)
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 // User
 export const UPDATE_USER = async ({ values }) => {
     try {

@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import FormikField from '@components/UI/FormikField';
 import toast from 'react-hot-toast';
+import { useBillingAddress } from '@contexts/providers/UserBillingAddressContext';
+import { UPDATE_USER_BILLING_ADDRESS } from '@utils/api';
 
 const fields = [
     {
@@ -101,27 +103,32 @@ const validationSchema = Yup.object({
 
 function BillingAddress({ className }) {
 
+    const { loading, billingAddress, setBillingAddress } = useBillingAddress();
+
     // Initial values
     const initialValues = React.useMemo(() => {
         return {
-            first_name: '',
-            last_name: '',
-            company_name: '',
-            street_address: '',
-            country_region: '',
-            states: '',
-            zip_code: '',
-            email: '',
-            phone: ''
+            first_name: loading ? 'Loading...' : billingAddress?.first_name || '',
+            last_name: loading ? 'Loading...' : billingAddress?.last_name || '',
+            company_name: loading ? 'Loading...' : billingAddress?.company_name || '',
+            street_address: loading ? 'Loading...' : billingAddress?.street_address || '',
+            country_region: loading ? 'Loading...' : billingAddress?.country_region || '',
+            states: loading ? 'Loading...' : billingAddress?.states || '',
+            zip_code: loading ? 'Loading...' : billingAddress?.zip_code || '',
+            email: loading ? 'Loading...' : billingAddress?.email || '',
+            phone: loading ? 'Loading...' : billingAddress?.phone || ''
         }
-    }, []);
+    }, [loading, billingAddress]);
 
     // Handle Submit
     const handleSubmit = React.useCallback(async (values, actions) => {
         const { setSubmitting, resetForm } = actions;
         setSubmitting(true);
         try {
-            console.log(values);
+            const { error } = await UPDATE_USER_BILLING_ADDRESS({ values, billingAddressId: billingAddress.id });
+            if (error) throw error;
+            toast.success("Billing Address updated successfully");
+            setBillingAddress(prev => ({ ...prev, ...values }));
             resetForm();
         } catch (err) {
             toast.error(err.message || "Something went wrong");
@@ -129,13 +136,13 @@ function BillingAddress({ className }) {
         } finally {
             setSubmitting(false);
         }
-    }, []);
+    }, [billingAddress, setBillingAddress]);
 
     return (
         <div className={`billing-address border border-grey-100 rounded-lg${className ? ` ${className}` : ''}`}>
             {/* Heading */}
             <div className="heading p-3 md:p-5 border-b border-b-grey-100">
-                <h3 className='font-semibold text-lg'>Account Settings</h3>
+                <h3 className='font-semibold text-lg'>Billing Address</h3>
             </div>
             {/* Content */}
             <div className="content-wrapper p-3 md:p-5">
