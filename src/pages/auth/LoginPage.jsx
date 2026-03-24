@@ -1,5 +1,6 @@
 import Button from "@components/UI/Button";
 import FormikField from "@components/UI/FormikField";
+import { useAuth } from "@contexts/providers/AuthContext";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useChangeTitle from "@hooks/useChangeTitle";
@@ -7,7 +8,7 @@ import { supabase } from "@utils/supabaseClient";
 import { Formik } from "formik";
 import React from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 
 const fields = [
@@ -35,7 +36,10 @@ const validationSchema = Yup.object({
 });
 
 function LoginPage() {
+
     useChangeTitle({ title: 'Login' });
+
+    const { isAuth } = useAuth();
 
     const navigate = useNavigate();
 
@@ -62,6 +66,9 @@ function LoginPage() {
             setSubmitting(false);
         }
     }, [navigate]);
+
+    // Redirect to Home
+    if (isAuth) return <Navigate to={'/'} replace />;
 
     return (
         <div className="login-page py-5 md:py-10 lg:py-15">
