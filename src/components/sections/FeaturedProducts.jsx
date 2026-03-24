@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET } from "@utils/api";
 
 function FeaturedProducts() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['featured-products'],
-        queryFn: () => GET('/products?pagination[limit]=4&populate[thumbnail]=true&filters[is_featured][$eq]=true'),
+        queryFn: () => { },
+        enabled: false,
         refetchOnWindowFocus: false
     });
 

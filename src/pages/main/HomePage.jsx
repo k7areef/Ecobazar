@@ -1,4 +1,3 @@
-import CartDrawer from "@components/layout/CartDrawer";
 import NewsLetterModal from "@components/modals/NewsletterModal";
 import CompanyLogo from "@components/sections/CompanyLogo";
 import ContactInformation from "@components/sections/ContactInformation";

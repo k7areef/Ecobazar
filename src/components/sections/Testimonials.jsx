@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET } from "@utils/api";
 
 function Testimonials() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['testimonials'],
-        queryFn: () => GET('/testimonials?pagination[limit]=6&populate[avatar]=true'),
+        queryFn: () => { },
+        enabled: false,
         refetchOnWindowFocus: false
     });
 

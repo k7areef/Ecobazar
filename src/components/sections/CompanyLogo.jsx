@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET } from "@utils/api";
 
 function CompanyLogo() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['brands'],
-        queryFn: () => GET('/brands?pagination[limit]=5&populate[logo]=true'),
+        queryFn: () => { },
+        enabled: false,
         refetchOnWindowFocus: false
     });
 
