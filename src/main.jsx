@@ -6,6 +6,11 @@ import App from './App.jsx'
 // React Router DOM:
 import { BrowserRouter } from 'react-router-dom'
 
+// Swiper
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 // Context
 import AppProviders from '@contexts/AppProviders'
 
