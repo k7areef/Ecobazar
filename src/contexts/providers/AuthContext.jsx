@@ -6,18 +6,23 @@ const AuthContext = React.createContext();
 export const AuthContextProvider = ({ children }) => {
 
     const [isAuth, setIsAuth] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            const isLoggedIn = !!session?.user
-            setIsAuth(isLoggedIn);
-        })
-        subscription.unsubscribe();
+            setIsAuth(!!session?.user);
+            setLoading(false);
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
     }, []);
 
     return (
         <AuthContext.Provider value={{
-            isAuth
+            isAuth,
+            loading
         }}>
             {children}
         </AuthContext.Provider>
