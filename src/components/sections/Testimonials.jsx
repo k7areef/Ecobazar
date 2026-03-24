@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GET_TESTIMONIALS } from "@utils/api";
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SectionHeader from "./shared/SectionHeader";
 
 function Testimonials() {
 
@@ -24,34 +25,31 @@ function Testimonials() {
         <section className="testimonials-section py-5 md:py-10 bg-primary/10" id="testimonials">
             <div className="container">
                 {/* Header */}
-                <div className="section-header flex items-center justify-between mb-5 md:mb-10 max-md:flex-wrap max-sm:flex-col gap-3">
-                    <div className="text-wrapper w-full">
-                        <span className="uppercase text-primary italic">Testimonials</span>
-                        <h2 className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl">What Our Customer Says</h2>
+                <SectionHeader
+                    beforeTtitle="Testimonials"
+                    title="What Our Customer Says"
+                >
+                    <div className="slider-navigation flex items-center gap-2">
+                        <button
+                            type="button"
+                            title="Previous"
+                            aria-label="Previous"
+                            className={`testi-navi-prev ${navigationBtnStyles}`}
+                        >
+                            <FontAwesomeIcon icon={faAngleLeft} />
+                            <span className="sr-only">Previous</span>
+                        </button>
+                        <button
+                            type="button"
+                            title="Next"
+                            aria-label="Next"
+                            className={`testi-navi-next ${navigationBtnStyles}`}
+                        >
+                            <FontAwesomeIcon icon={faAngleRight} />
+                            <span className="sr-only">Next</span>
+                        </button>
                     </div>
-                    <div className="children-wrapper">
-                        <div className="slider-navigation flex items-center gap-3">
-                            <button
-                                type="button"
-                                title="Previous"
-                                aria-label="Previous"
-                                className={`testi-navi-prev ${navigationBtnStyles}`}
-                            >
-                                <FontAwesomeIcon icon={faAngleLeft} />
-                                <span className="sr-only">Previous</span>
-                            </button>
-                            <button
-                                type="button"
-                                title="Next"
-                                aria-label="Next"
-                                className={`testi-navi-next ${navigationBtnStyles}`}
-                            >
-                                <FontAwesomeIcon icon={faAngleRight} />
-                                <span className="sr-only">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </SectionHeader>
                 {/* Testimonials */}
                 <div className="testimonials-slider">
                     <Swiper
@@ -117,8 +115,8 @@ function Testimonials() {
                         }
                     </Swiper>
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
     )
 }
 
