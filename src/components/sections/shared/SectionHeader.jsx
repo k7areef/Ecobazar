@@ -19,7 +19,7 @@ function SectionHeader({ beforeTtitle, title, description, children, className }
                 <h2 className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl">{title}</h2>
                 {description && <p>{description}</p>}
             </div>
-            <div className="children-wrapper">
+            <div className="children-wrapper shrink-0">
                 {children}
             </div>
         </div>
