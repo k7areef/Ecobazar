@@ -29,7 +29,7 @@ function DashboardLayout() {
                                     to={link.to}
                                     aria-label={link.label}
                                     end={link.to === "/dashboard"}
-                                    className={({ isActive }) => `transition-colors duration-200 flex items-center gap-2 font-medium py-3 px-4 border-s-[3px] ${isActive ? "bg-green-50 border-s-primary" : "border-s-transparent sm:hover:bg-green-50"}`}
+                                    className={({ isActive }) => `transition duration-200 flex items-center gap-2 font-medium py-3 px-4 border-s-[3px] ${isActive ? "bg-green-50 border-s-primary" : "opacity-80 border-s-transparent sm:hover:bg-green-50"}`}
                                 >
                                     <FontAwesomeIcon icon={link.icon} />
                                     <span>{link.label}</span>
