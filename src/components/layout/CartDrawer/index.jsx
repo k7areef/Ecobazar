@@ -1,5 +1,6 @@
 import Button from "@components/UI/Button";
 import Drawer from "@components/UI/Drawer";
+import { useAuth } from "@contexts/providers/AuthContext";
 import { useCart } from "@contexts/providers/CartContext";
 import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 
 function CartDrawer() {
 
+    const { isAuth } = useAuth();
     const { isLoading, cart, isOpen, closeDrawer } = useCart();
 
     return (
@@ -17,7 +19,15 @@ function CartDrawer() {
                 className="cart-drawer h-screen bg-white w-75 sm:w-85 md:w-100 ms-auto p-5 flex flex-col gap-5"
             >
                 {
-                    isLoading ? (
+                    !isAuth ? (
+                        <div className="m-auto">
+                            <Link
+                                to={'/login'}
+                                onClick={closeDrawer}
+                                className="font-medium text-primary underline"
+                            >Please login to access cart</Link>
+                        </div>
+                    ) : isLoading ? (
                         <div className="m-auto">
                             <FontAwesomeIcon icon={faSpinner} className="animate-spin text-2xl text-primary" />
                         </div>
