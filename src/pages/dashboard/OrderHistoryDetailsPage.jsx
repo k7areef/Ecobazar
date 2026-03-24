@@ -1,3 +1,4 @@
+import OrderHistoryDetails from "@components/dashboard/OrderHistoryDetails";
 import useChangeTitle from "@hooks/useChangeTitle";
 import { useParams } from "react-router-dom";
 
@@ -8,7 +9,7 @@ function OrderHistoryDetailsPage() {
 
     return (
         <div className="order-history-details-page">
-            OrderHistoryDetailsPage
+            <OrderHistoryDetails />
         </div>
     )
 }
