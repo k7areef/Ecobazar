@@ -11,6 +11,7 @@
  * @param {FormikFieldProps} props
  */
 
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ErrorMessage } from "formik";
@@ -22,7 +23,15 @@ const iconsmap = {
 
 function FormikField({ typeField = "input", label, icon, mainClassName, ...props }) {
 
+    const [passRevaled, setPassRevaled] = React.useState(false);
+
     const sharedStyles = `w-full p-3 bg-white border border-grey-100 placeholder:text-grey-600 rounded-md transition duration-300 ease-in-out read-only:border-transparent not-read-only:focus:border-purple-60`;
+
+    const handleRevalPassword = React.useCallback(() => {
+        setPassRevaled(prev => !prev);
+    }, []);
+
+    const inputType = (props.type === "password" && passRevaled) ? "text" : props.type;
 
     return (
         <div className={`formik-field${mainClassName ? " " + mainClassName : ""} relative`}>
@@ -33,10 +42,24 @@ function FormikField({ typeField = "input", label, icon, mainClassName, ...props
             {label && <label htmlFor={props.id} className="w-fit block mb-2">{label}</label>}
             {
                 typeField === "input" ? (
-                    <input
-                        {...props}
-                        className={sharedStyles}
-                    />
+                    <div className="input-wrapper relative">
+                        <input
+                            {...props}
+                            type={inputType}
+                            className={sharedStyles}
+                        />
+                        {
+                            props.type === "password" &&
+                            <button
+                                type="button"
+                                onClick={handleRevalPassword}
+                                className="absolute bottom-2.5 right-3 text-lg"
+                            >
+                                <FontAwesomeIcon icon={passRevaled ? faEyeSlash : faEye} />
+                                <span className="sr-only">Reveal Password</span>
+                            </button>
+                        }
+                    </div>
                 ) : typeField === "textarea" ? (
                     <textarea
                         {...props}
