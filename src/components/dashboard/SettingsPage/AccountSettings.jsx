@@ -14,6 +14,7 @@ import FormikField from '@components/UI/FormikField';
 import toast from 'react-hot-toast';
 import DefaultAvatar from '@assets/images/default-avatar.png';
 import { UPDATE_USER_PROFILE } from '@utils/api';
+import { useAuth } from '@contexts/providers/AuthContext';
 
 const fields = [
     {
@@ -63,17 +64,19 @@ const validationSchema = Yup.object({
 
 function AccountSettings({ className }) {
 
+    // Auth
+    const { isAuth } = useAuth();
     // Profile
     const { loading, profile, setProfile } = useProfile();
 
     // Initial values
     const initialValues = React.useMemo(() => {
         return {
-            first_name: loading ? 'loading...' : profile.first_name || '',
-            last_name: loading ? 'loading...' : profile.last_name || '',
-            email: loading ? 'loading...' : profile.email || '',
-            phone: loading ? 'loading...' : profile.phone || '',
-            avatar_url: loading ? 'loading...' : profile.avatar_url || ''
+            first_name: loading ? 'loading...' : profile?.first_name || '',
+            last_name: loading ? 'loading...' : profile?.last_name || '',
+            email: loading ? 'loading...' : profile?.email || '',
+            phone: loading ? 'loading...' : profile?.phone || '',
+            avatar_url: loading ? 'loading...' : profile?.avatar_url || ''
         }
     }, [loading, profile]);
 
@@ -160,7 +163,7 @@ function AccountSettings({ className }) {
                                                 </div>
                                             ) : (
                                                 <img
-                                                    src={profile.avatar_url || DefaultAvatar}
+                                                    src={profile?.avatar_url || DefaultAvatar}
                                                     alt='User Avatar'
                                                     className='w-full h-full object-cover'
                                                 />
@@ -172,7 +175,7 @@ function AccountSettings({ className }) {
                                         variant='outline'
                                         title="Upload Avatar"
                                         aria-label="Upload Avatar"
-                                        disabled={loading || isSubmitting}
+                                        disabled={!isAuth || loading || isSubmitting}
                                         className='block mx-auto rounded-full disabled:opacity-75 disabled:pointer-events-none p-0!'
                                     >
                                         <label className='px-4 py-2 sm:py-3 block cursor-pointer'>
@@ -193,7 +196,7 @@ function AccountSettings({ className }) {
                                 type="submit"
                                 title="Save Changes"
                                 aria-label="Save Changes"
-                                disabled={!dirty || isSubmitting}
+                                disabled={!isAuth || !dirty || isSubmitting}
                                 className='rounded-full disabled:opacity-75 disabled:cursor-not-allowed disabled:pointer-events-none'
                             >
                                 {

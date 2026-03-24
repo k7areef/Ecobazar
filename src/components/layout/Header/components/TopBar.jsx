@@ -85,14 +85,14 @@ function TopBar() {
                             <div className="welcome-user">
                                 <Link to={'/dashboard'} className="sm:hover:underline sm:hover:text-white transition-colors duration-200">
                                     {
-                                        (profile.first_name) ? (
+                                        (profile?.first_name) ? (
                                             <div className="user-name">
                                                 {profile.first_name}
                                                 {profile.last_name ? " " + profile.last_name : ""}
                                             </div>
                                         ) : (
                                             <div className="user-email">
-                                                {profile.email}
+                                                {profile?.email}
                                             </div>
                                         )
                                     }

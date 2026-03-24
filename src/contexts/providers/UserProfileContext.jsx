@@ -9,10 +9,13 @@ export const UserProfileContextProvider = ({ children }) => {
     const { isAuth, authLoading } = useAuth();
 
     const [profile, setProfile] = React.useState(null);
-    const [loading, setLoading] = React.useState(authLoading || !profile);
+    const [loading, setLoading] = React.useState(isAuth || authLoading || !profile);
 
     React.useEffect(() => {
-        if (!isAuth) return;
+        if (!isAuth) {
+            setLoading(false);
+            return;
+        };
         setLoading(true);
         GET_USER_PROFILE().then(res => { // Get User Profile
             setProfile(res.data);

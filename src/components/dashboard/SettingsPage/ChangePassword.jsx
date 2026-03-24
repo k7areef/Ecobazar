@@ -116,8 +116,8 @@ function ChangePassword({ className }) {
                             {/* Submit */}
                             <Button
                                 type="submit"
-                                title="Save Changes"
-                                aria-label="Save Changes"
+                                title="Change Password"
+                                aria-label="Change Password"
                                 disabled={!dirty || isSubmitting}
                                 className='rounded-full disabled:opacity-75 disabled:cursor-not-allowed disabled:pointer-events-none'
                             >
