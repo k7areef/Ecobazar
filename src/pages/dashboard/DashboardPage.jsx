@@ -7,10 +7,10 @@ function DashboardPage() {
     useChangeTitle({ title: 'Dashboard' });
     return (
         <div className="dashboard-page">
-            <div className="content-wrapper grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="content-wrapper grid grid-cols-1 md:grid-cols-2 gap-5">
                 <UserAvatar />
                 <UserAddress />
-                <RecentOrderHistory className="md:col-span-3" />
+                <RecentOrderHistory className="md:col-span-2" />
             </div>
         </div>
     )
