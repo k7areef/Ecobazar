@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { GET_PRODUCTS } from "@utils/api";
+import ProductsGrid from "@components/products/ProductsGrid";
 
 function FeaturedProducts() {
 
+    const LIMIT = 4;
+
     const { data, isLoading } = useQuery({
         queryKey: ['featured-products'],
-        queryFn: () => GET_PRODUCTS({ limit: 4 }).then(res => res.data),
+        queryFn: () => GET_PRODUCTS({ limit: LIMIT }).then(res => res.data),
         refetchOnWindowFocus: false
     });
 
@@ -28,17 +31,7 @@ function FeaturedProducts() {
                     </Link>
                 </SectionHeader>
                 {/* Products */}
-                <div className="products-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-                    {
-                        isLoading ? (
-                            <>Loading</>
-                        ) : (
-                            data.map((product, index) => (<div className="product-card" key={index}>
-                                Product {index + 1}
-                            </div>))
-                        )
-                    }
-                </div>
+                <ProductsGrid isLoading={isLoading} products={data} limit={LIMIT} />
             </div>
         </section>
     )
