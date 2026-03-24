@@ -24,7 +24,7 @@ function Testimonials() {
     const navigationBtnStyles = `transition duration-300 ease-in-out w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center bg-primary text-white disabled:bg-white disabled:text-inherit disabled:cursor-not-allowed disabled:border-grey-100`;
 
     return (
-        <section className="testimonials-section py-5 md:py-10 bg-primary/10" id="testimonials">
+        <section className="testimonials-section py-5 md:py-10 bg-[#f3f5f3]" id="testimonials">
             <div className="container">
                 {/* Header */}
                 <SectionHeader
