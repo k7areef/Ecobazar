@@ -31,7 +31,7 @@ function MiddleBar() {
                                 type="text"
                                 name="search"
                                 placeholder="Search..."
-                                className="w-full py-3 px-6 ps-10 rounded-md border-2 border-grey-100"
+                                className="w-full py-3 px-6 ps-10 rounded-md border-2 border-grey-100 focus:border-primary transition-colors caret-primary"
                             />
                             <Button
                                 type="submit"
