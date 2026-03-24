@@ -92,7 +92,6 @@ function ChangePassword({ className }) {
                     {({
                         values,
                         handleChange,
-                        handleBlur,
                         handleSubmit,
                         isSubmitting,
                         dirty
@@ -107,7 +106,6 @@ function ChangePassword({ className }) {
                                         {...{
                                             ...field,
                                             onChange: handleChange,
-                                            onBlur: handleBlur,
                                             value: values[field.name],
                                         }}
                                     />))
