@@ -16,14 +16,14 @@ import { Link } from "react-router-dom";
  * @typedef {CustomButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement> & import("react-router-dom").LinkProps} ButtonProps
  */
 
-function Button({ variant = "primary", to, href, type, className, children }) {
+function Button({ variant = "primary", to, href, type, className, children, ...props }) {
 
     const variants = {
         primary: "bg-primary text-white sm:hover:bg-hard-primary",
         secondary: "bg-grey-50 text-grey-900 sm:hover:bg-grey-100",
         ghost: "bg-primary/10 text-primary sm:hover:bg-hard-primary/20",
         dark: "bg-grey-800 text-white sm:hover:bg-grey-900",
-        outline: "outline outline-2 outline-primary text-primary sm:hover:outline-hard-primary sm:hover:text-hard-primary",
+        outline: "outline outline-2! outline-primary text-primary sm:hover:outline-hard-primary sm:hover:text-hard-primary",
     }
 
     const classNames = `px-4 py-2 sm:py-3 font-semibold transition duration-300 ease-in-out ${variants[variant]}${className ? ` ${className}` : ""}`;
@@ -31,6 +31,7 @@ function Button({ variant = "primary", to, href, type, className, children }) {
     if (href) {
         return (
             <a
+                {...props}
                 href={href}
                 className={classNames}
             >
@@ -43,6 +44,7 @@ function Button({ variant = "primary", to, href, type, className, children }) {
         return (
             <Link
                 to={to}
+                {...props}
                 className={classNames}
             >
                 {children}
@@ -52,6 +54,7 @@ function Button({ variant = "primary", to, href, type, className, children }) {
 
     return (
         <button
+            {...props}
             className={classNames}
             type={type || "button"}
         >

@@ -14,7 +14,7 @@ const links = [
 function DashboardLayout() {
     return (
         <div className="dashboard-layout">
-            <div className="container flex gap-5 py-5 md:py-10">
+            <div className="container flex items-start gap-5 py-5 md:py-10">
                 {/* Sidebar */}
                 <aside className="bg-white border border-grey-100 rounded-lg py-3 w-70">
                     {/* Heading */}

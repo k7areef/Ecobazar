@@ -19,9 +19,13 @@ export const UserProfileContextProvider = ({ children }) => {
         }).finally(() => setLoading(false));
     }, [isAuth]);
 
+    console.log(profile);
+
+
     return (
         <UserProfileContext.Provider value={{
             profile,
+            setProfile,
             loading
         }}>
             {children}
