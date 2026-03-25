@@ -4,12 +4,11 @@
  * @prop {string} [className]
  */
 
-import { faEye, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faShoppingBag, faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { supabase } from "@utils/supabaseClient";
 import React from "react";
-import toast from "react-hot-toast";
+import { useCart } from "@contexts/providers/CartContext";
+import { faEye, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faShoppingBag, faSpinner, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 /**
@@ -18,29 +17,27 @@ import { Link } from "react-router-dom";
 
 function ProductCard({ product, className }) {
 
-    const [loading, setLoading] = React.useState(false);
+    const { cart, addToCart, removeFromCart } = useCart();
+
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    const inCart = React.useMemo(() => {
+        return (cart || []).find(c => c.product_id === product.id);
+    }, [cart, product]);
 
     const handleAddToCart = React.useCallback(async () => {
-        if (loading) return;
-        setLoading(true);
-        try {
-            const { data, error } = await supabase.from("carts").upsert({
-                product_id: product.id
-            }, {
-                onConflict: "user_id, product_id"
-            }).select("*").single();
-            if (error) throw error;
-            console.log(data);
-        } catch (err) {
-            toast.error(err.message);
-            console.log(err.message);
-        } finally {
-            setLoading(false);
+        if (isLoading) return;
+        setIsLoading(true);
+        if (inCart) {
+            await removeFromCart({ productId: product.id });
+        } else {
+            await addToCart({ productId: product.id });
         }
-    }, [loading, product]);
+        setIsLoading(false);
+    }, [isLoading, inCart, removeFromCart, addToCart, product]);
 
     return (
-        <div className={`product-card border border-grey-100 rounded-lg group relative overflow-hidden ${className}`}>
+        <div className={`product-card border border-grey-100 transition sm:hover:border-primary sm:hover:shadow/40 sm:hover:shadow-primary rounded-lg group relative overflow-hidden ${className}`}>
             {/* Product Image */}
             <Link
                 to={`/shop/${product.title}/${product.id}`}
@@ -74,12 +71,12 @@ function ProductCard({ product, className }) {
                 {/* Add to Cart */}
                 <button
                     type="button"
-                    title="Add to Cart"
-                    aria-label="Add to Cart"
                     onClick={handleAddToCart}
-                    className="shrink-0 w-12 h-12 rounded-full bg-grey-50 flex items-center justify-center text-xl sm:hover:bg-primary sm:hover:text-white transition-colors duration-300 ease-in-out"
+                    title={inCart ? "Added to Cart" : "Add to Cart"}
+                    aria-label={inCart ? "Added to Cart" : "Add to Cart"}
+                    className={`shrink-0 w-12 h-12 rounded-full ${inCart ? "bg-primary text-white" : "bg-grey-50 sm:hover:bg-primary sm:hover:text-white"} flex items-center justify-center text-xl transition-colors duration-300 ease-in-out`}
                 >
-                    <FontAwesomeIcon icon={faShoppingBag} />
+                    <FontAwesomeIcon icon={isLoading ? faSpinner : faShoppingBag} {...(isLoading ? { className: "animate-spin" } : {})} />
                     <span className="sr-only">Add to Cart</span>
                 </button>
             </div>

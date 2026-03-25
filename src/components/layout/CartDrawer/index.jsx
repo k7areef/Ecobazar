@@ -6,11 +6,16 @@ import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
+import CartProduct from "./components/CartProduct";
 
 function CartDrawer() {
 
     const { isAuth } = useAuth();
-    const { isLoading, cart, isOpen, closeDrawer } = useCart();
+    const { isInitialLoading, cart, isOpen, closeDrawer } = useCart();
+
+    const totalPrice = React.useMemo(() => {
+        return (cart || []).reduce((prev, curr) => prev + curr.product.price * curr.quantity, 0);
+    }, [cart]);
 
     return (
         <Drawer isOpen={isOpen} closeDrawer={closeDrawer}>
@@ -27,16 +32,16 @@ function CartDrawer() {
                                 className="font-medium text-primary underline"
                             >Please login to access cart</Link>
                         </div>
-                    ) : isLoading ? (
+                    ) : isInitialLoading ? (
                         <div className="m-auto">
                             <FontAwesomeIcon icon={faSpinner} className="animate-spin text-2xl text-primary" />
                         </div>
                     ) : (
-                        cart?.items?.lenth > 0 ? (
+                        cart?.length > 0 ? (
                             <React.Fragment>
                                 {/* Header */}
                                 <div className="drawer-header flex items-center justify-between">
-                                    <h3 className="font-semibold text-lg">Shopping Cart ({0})</h3>
+                                    <h3 className="font-semibold text-lg">Shopping Cart ({cart?.length})</h3>
                                     <button
                                         type="button"
                                         onClick={closeDrawer}
@@ -50,13 +55,15 @@ function CartDrawer() {
                                 </div>
                                 {/* Cart Products */}
                                 <div className="cart-products">
-                                    Cart Products
+                                    {
+                                        (cart || []).map((cart, index) => (<CartProduct cart={cart} key={index} />))
+                                    }
                                 </div>
                                 {/* Footer */}
                                 <div className="drawer-footer mt-auto">
                                     <div className="footer-head flex items-center justify-between font-medium mb-3">
-                                        <span>{2} Product</span>
-                                        <span>${0}</span>
+                                        <span>{cart?.length} Product</span>
+                                        <span>${totalPrice}</span>
                                     </div>
                                     <div className="footer-actions space-y-3 text-center [&>a]:rounded-full [&>a]:block">
                                         <Button

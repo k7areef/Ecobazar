@@ -16,8 +16,6 @@ function FeaturedProducts() {
         refetchOnWindowFocus: false
     });
 
-    console.log(isLoading ? "Featured Products Loading..." : data ? data : "No data")
-
     return (
         <section className="featured-products-section py-5 md:py-10" id="featuredProducts">
             <div className="container">

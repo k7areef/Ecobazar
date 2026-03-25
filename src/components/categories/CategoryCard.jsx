@@ -13,7 +13,7 @@ function CategoryCard({ category, className }) {
     return (
         <Link
             to={'/shop'}
-            className={`category-card block p-3 bg-white border border-grey-100 rounded-lg transition-colors duration-200 sm:hover:border-primary sm:hover:shadow/30 sm:hover:shadow-primary group ${className}`}
+            className={`category-card block p-3 bg-white border border-grey-100 rounded-lg transition-colors duration-200 sm:hover:border-primary sm:hover:shadow/40 sm:hover:shadow-primary group ${className}`}
         >
             {/* Image */}
             <div className="category-image w-20 h-20 mx-auto mb-2">

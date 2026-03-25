@@ -17,8 +17,6 @@ function TopCategories() {
         refetchOnWindowFocus: false
     });
 
-    console.log(isLoading ? "Top Categories Loading..." : data ? data : "No data");
-
     return (
         <section className="top-categories-section py-5 md:py-10 bg-[#f5f7f5]" id="topCategories">
             <div className="container">
