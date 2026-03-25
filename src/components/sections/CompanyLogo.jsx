@@ -3,9 +3,11 @@ import { supabase } from "@utils/supabaseClient";
 
 function CompanyLogo() {
 
+    const LIMIT = 6;
+
     const { data, isLoading } = useQuery({
         queryKey: ['brands'],
-        queryFn: async () => await supabase.from("brands").select("*").limit(6).then(res => res.data),
+        queryFn: async () => await supabase.from("brands").select("*").limit(LIMIT).then(res => res.data),
         refetchOnWindowFocus: false
     });
 
@@ -15,7 +17,8 @@ function CompanyLogo() {
                 <div className="brands grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
                     {
                         isLoading ? (
-                            <>Loading...</>
+                            Array.from({ length: LIMIT }).map((_, index) => (<div className="brand-card-skeleton h-8 animate-pulse rounded-sm bg-primary/30" key={index}>
+                            </div>))
                         ) : (
                             data.map((brand, index) => (<div className="brand-card grayscale-100 transition-all duration-200 sm:hover:grayscale-0" key={index}>
                                 <img
