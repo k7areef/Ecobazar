@@ -21,7 +21,11 @@ export const CartProvider = ({ children }) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [isInitialLoading, setIsInitialLoading] = React.useState(isAuth);
     const [cart, setCart] = React.useState();
+    const [cartCount, setCartCount] = React.useState();
+    const [cartTotal, setCartTotal] = React.useState(0);
+    const [shipping] = React.useState(0);
 
+    // Get User Cart
     React.useEffect(() => {
         if (!isAuth) return;
         setIsInitialLoading(true);
@@ -29,6 +33,12 @@ export const CartProvider = ({ children }) => {
             setCart(res.data);
         }).finally(() => setIsInitialLoading(false));
     }, [isAuth]);
+    // Calculate Cart Total
+    React.useEffect(() => {
+        if (!cart) return;
+        setCartCount(cart.length);
+        setCartTotal(cart.reduce((total, item) => total + item.product.price * item.quantity, 0));
+    }, [cart]);
 
     const toggleDrawer = React.useCallback(() => setIsOpen(!isOpen), [isOpen]);
     const closeDrawer = React.useCallback(() => setIsOpen(false), []);
@@ -66,6 +76,9 @@ export const CartProvider = ({ children }) => {
             isOpen,
             isInitialLoading,
             cart,
+            cartCount,
+            cartTotal,
+            shipping,
             addToCart,
             removeFromCart,
             toggleDrawer,

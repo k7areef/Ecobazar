@@ -2,14 +2,14 @@ import React from "react";
 import AppLogo from "@components/common/AppLogo";
 import Button from "@components/UI/Button";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faCartShopping, faMagnifyingGlassArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faMagnifyingGlassArrowRight, faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useCart } from "@contexts/providers/CartContext";
 
 function MiddleBar() {
 
-    const { toggleDrawer } = useCart()
+    const { toggleDrawer, cartCount, cartTotal, isInitialLoading } = useCart()
 
     const [openSearch, setOpenSearch] = React.useState(false);
 
@@ -81,13 +81,19 @@ function MiddleBar() {
                     >
                         {/* Icon */}
                         <div className="icon-container relative">
-                            <div className="cart-products-count bg-hard-primary text-white w-6 h-6 rounded-full flex items-center justify-center absolute z-1 top-0 right-0 translate-x-2.5 -translate-y-4">{5}</div>
+                            <div className="cart-products-count bg-hard-primary text-white w-6 h-6 rounded-full flex items-center justify-center absolute z-1 top-0 right-0 translate-x-2.5 -translate-y-4">{
+                                isInitialLoading ? (
+                                    <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+                                ) : (
+                                    cartCount
+                                )
+                            }</div>
                             <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
                         </div>
                         {/* Cart Info */}
                         <div className="cart-info text-start max-sm:hidden">
                             <span className="text-grey-700">Shopping cart:</span>
-                            <h3 className="mt-0.5 font-semibold text-lg">${10}.00</h3>
+                            <h3 className="mt-0.5 font-semibold text-lg">${cartTotal}</h3>
                         </div>
                     </button>
                 </div>

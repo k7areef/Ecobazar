@@ -11,11 +11,7 @@ import CartProduct from "./components/CartProduct";
 function CartDrawer() {
 
     const { isAuth } = useAuth();
-    const { isInitialLoading, cart, isOpen, closeDrawer } = useCart();
-
-    const totalPrice = React.useMemo(() => {
-        return (cart || []).reduce((prev, curr) => prev + curr.product.price * curr.quantity, 0);
-    }, [cart]);
+    const { isInitialLoading, cart, cartTotal, isOpen, closeDrawer } = useCart();
 
     return (
         <Drawer isOpen={isOpen} closeDrawer={closeDrawer}>
@@ -63,19 +59,20 @@ function CartDrawer() {
                                 <div className="drawer-footer mt-auto">
                                     <div className="footer-head flex items-center justify-between font-medium mb-3">
                                         <span>{cart?.length} Product</span>
-                                        <span>${totalPrice}</span>
+                                        <span>${cartTotal}</span>
                                     </div>
                                     <div className="footer-actions space-y-3 text-center [&>a]:rounded-full [&>a]:block">
                                         <Button
                                             to={'/checkout'}
                                             onClick={closeDrawer}
-                                            className=""
+                                            disabled={isInitialLoading}
                                         >
                                             Checkout
                                         </Button>
                                         <Button
                                             to={'/cart'}
                                             onClick={closeDrawer}
+                                            disabled={isInitialLoading}
                                             variant="ghost"
                                         >
                                             Go To Cart
