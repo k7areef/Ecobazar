@@ -14,7 +14,7 @@ function CompanyLogo() {
     return (
         <section className="company-logo-section py-5 md:py-10" id="companyLogo">
             <div className="container">
-                <div className="brands grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
+                <div className="brands grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
                     {
                         isLoading ? (
                             Array.from({ length: LIMIT }).map((_, index) => (<div className="brand-card-skeleton h-8.25 animate-pulse rounded-sm bg-primary/30" key={index}>
