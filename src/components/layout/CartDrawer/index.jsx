@@ -68,12 +68,14 @@ function CartDrawer() {
                                     <div className="footer-actions space-y-3 text-center [&>a]:rounded-full [&>a]:block">
                                         <Button
                                             to={'/checkout'}
+                                            onClick={closeDrawer}
                                             className=""
                                         >
                                             Checkout
                                         </Button>
                                         <Button
-                                            to={'/checkout'}
+                                            to={'/cart'}
+                                            onClick={closeDrawer}
                                             variant="ghost"
                                         >
                                             Go To Cart
