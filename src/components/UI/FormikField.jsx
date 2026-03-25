@@ -25,7 +25,7 @@ function FormikField({ typeField = "input", label, icon, mainClassName, ...props
 
     const [passRevaled, setPassRevaled] = React.useState(false);
 
-    const sharedStyles = `w-full p-3 bg-white border border-grey-100 placeholder:text-grey-600 rounded-md transition duration-300 ease-in-out read-only:border-transparent not-read-only:focus:border-purple-60`;
+    const sharedStyles = `w-full p-3 bg-white border border-grey-100 placeholder:text-grey-600 rounded-md transition duration-300 ease-in-out read-only:border-transparent not-read-only:focus:border-primary`;
 
     const handleRevalPassword = React.useCallback(() => {
         setPassRevaled(prev => !prev);
