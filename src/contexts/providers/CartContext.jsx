@@ -16,7 +16,7 @@ const GET_USER_CART = async () => {
 
 export const CartProvider = ({ children }) => {
 
-    const { isAuth } = useAuth();
+    const { isAuth, user } = useAuth();
 
     const [isOpen, setIsOpen] = React.useState(false);
     const [isInitialLoading, setIsInitialLoading] = React.useState(isAuth);
@@ -61,7 +61,12 @@ export const CartProvider = ({ children }) => {
     // Remvoe from cart
     const removeFromCart = React.useCallback(async ({ productId }) => {
         try {
-            const { error } = await supabase.from("carts").delete().eq("product_id", productId);
+            if (!user) return;
+            const { error } = await supabase
+                .from("carts")
+                .delete()
+                .eq("user_id", user.id)
+                .eq("product_id", productId);
             if (error) throw error;
             toast.success("Product removed from cart");
             setCart(prev => prev.filter(c => c.product_id !== productId));
@@ -69,7 +74,35 @@ export const CartProvider = ({ children }) => {
             toast.error(err.message);
             throw err;
         }
-    }, []);
+    }, [user]);
+
+    // Update quantity in cart (used by Cart page +/- controls)
+    const updateQuantity = React.useCallback(async ({ productId, quantity }) => {
+        try {
+            if (!user) return;
+            if (quantity <= 0) {
+                await removeFromCart({ productId });
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from("carts")
+                .update({ quantity })
+                .eq("user_id", user.id)
+                .eq("product_id", productId)
+                .select(`*, product:products(*)`)
+                .single();
+
+            if (error) throw error;
+            setCart(prev => {
+                if (!prev) return prev;
+                return prev.map(item => item.product_id === productId ? data : item);
+            });
+        } catch (err) {
+            toast.error(err.message);
+            console.log(err);
+        }
+    }, [removeFromCart, user]);
 
     return (
         <CartContext.Provider value={{
@@ -81,6 +114,7 @@ export const CartProvider = ({ children }) => {
             shipping,
             addToCart,
             removeFromCart,
+            updateQuantity,
             toggleDrawer,
             closeDrawer
         }}>
