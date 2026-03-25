@@ -8,6 +8,7 @@ import LatestNews from "@components/sections/LatestNews";
 import Statistics from "@components/sections/Statistics";
 import Testimonials from "@components/sections/Testimonials";
 import TopCategories from "@components/sections/TopCategories";
+import WhyChoseUs from "@components/sections/WhyChoseUs";
 import useChangeTitle from "@hooks/useChangeTitle";
 
 function HomePage() {
@@ -19,6 +20,7 @@ function HomePage() {
                 <Features />
                 <FeaturedProducts />
                 <TopCategories />
+                <WhyChoseUs />
                 <Statistics />
                 <LatestNews />
                 <Testimonials />
