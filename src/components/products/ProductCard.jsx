@@ -7,6 +7,9 @@
 import { faEye, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faShoppingBag, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { supabase } from "@utils/supabaseClient";
+import React from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 /**
@@ -14,6 +17,28 @@ import { Link } from "react-router-dom";
  */
 
 function ProductCard({ product, className }) {
+
+    const [loading, setLoading] = React.useState(false);
+
+    const handleAddToCart = React.useCallback(async () => {
+        if (loading) return;
+        setLoading(true);
+        try {
+            const { data, error } = await supabase.from("carts").upsert({
+                product_id: product.id
+            }, {
+                onConflict: "user_id, product_id"
+            }).select("*").single();
+            if (error) throw error;
+            console.log(data);
+        } catch (err) {
+            toast.error(err.message);
+            console.log(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }, [loading, product]);
+
     return (
         <div className={`product-card border border-grey-100 rounded-lg group relative overflow-hidden ${className}`}>
             {/* Product Image */}
@@ -51,6 +76,7 @@ function ProductCard({ product, className }) {
                     type="button"
                     title="Add to Cart"
                     aria-label="Add to Cart"
+                    onClick={handleAddToCart}
                     className="shrink-0 w-12 h-12 rounded-full bg-grey-50 flex items-center justify-center text-xl sm:hover:bg-primary sm:hover:text-white transition-colors duration-300 ease-in-out"
                 >
                     <FontAwesomeIcon icon={faShoppingBag} />
