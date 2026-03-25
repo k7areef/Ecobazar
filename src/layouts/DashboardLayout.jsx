@@ -16,7 +16,7 @@ function DashboardLayout() {
         <div className="dashboard-layout">
             <div className="container flex items-start gap-5 py-5 md:py-10">
                 {/* Sidebar */}
-                <aside className="bg-white border border-grey-100 rounded-lg py-3 w-70">
+                <aside className="bg-white border border-grey-100 rounded-lg py-3 w-70 shrink-0 max-lg:hidden">
                     {/* Heading */}
                     <div className="heading py-3 px-4.75">
                         <h3 className="font-medium sm:font-semibold text-lg sm:text-xl">Navigation</h3>
@@ -39,7 +39,7 @@ function DashboardLayout() {
                     </ul>
                 </aside>
                 {/* Main */}
-                <main className="flex-1">
+                <main className="w-full min-w-0">
                     {/* Outlet */}
                     <Outlet />
                 </main>
