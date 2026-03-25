@@ -52,6 +52,7 @@ function FormikField({ typeField = "input", label, icon, mainClassName, ...props
                             props.type === "password" &&
                             <button
                                 type="button"
+                                tabIndex="-1"
                                 onClick={handleRevalPassword}
                                 className="absolute bottom-2.5 right-3 text-lg"
                             >
