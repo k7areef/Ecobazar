@@ -1,4 +1,5 @@
 import ContactForm from "@components/sections/ContactForm";
+import GoogleMaps from "@components/sections/GoogleMaps";
 import useChangeTitle from "@hooks/useChangeTitle";
 
 function ContactPage() {
@@ -6,6 +7,7 @@ function ContactPage() {
     return (
         <div className="contact-page">
             <ContactForm />
+            <GoogleMaps />
         </div>
     )
 }
