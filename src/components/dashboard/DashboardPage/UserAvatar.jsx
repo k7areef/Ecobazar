@@ -30,7 +30,7 @@ function UserAvatar({ className }) {
                         </div>
                     ) : (
                         <img
-                            src={profile.avatar_url || DefaultAvatar}
+                            src={profile?.avatar_url || DefaultAvatar}
                             alt='User Avatar'
                             className='w-full h-full object-cover'
                         />
