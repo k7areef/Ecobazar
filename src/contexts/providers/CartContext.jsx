@@ -104,6 +104,22 @@ export const CartProvider = ({ children }) => {
         }
     }, [removeFromCart, user]);
 
+    // Clear the cart after a successful checkout/order
+    const clearCart = React.useCallback(async () => {
+        try {
+            if (!user) return;
+            const { error } = await supabase
+                .from("carts")
+                .delete()
+                .eq("user_id", user.id);
+            if (error) throw error;
+            setCart([]);
+        } catch (err) {
+            toast.error(err.message);
+            console.log(err);
+        }
+    }, [user]);
+
     return (
         <CartContext.Provider value={{
             isOpen,
@@ -115,6 +131,7 @@ export const CartProvider = ({ children }) => {
             addToCart,
             removeFromCart,
             updateQuantity,
+            clearCart,
             toggleDrawer,
             closeDrawer
         }}>
