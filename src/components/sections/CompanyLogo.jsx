@@ -17,7 +17,7 @@ function CompanyLogo() {
                 <div className="brands grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
                     {
                         isLoading ? (
-                            Array.from({ length: LIMIT }).map((_, index) => (<div className="brand-card-skeleton h-8 animate-pulse rounded-sm bg-primary/30" key={index}>
+                            Array.from({ length: LIMIT }).map((_, index) => (<div className="brand-card-skeleton h-8.25 animate-pulse rounded-sm bg-primary/30" key={index}>
                             </div>))
                         ) : (
                             data.map((brand, index) => (<div className="brand-card grayscale-100 transition-all duration-200 sm:hover:grayscale-0" key={index}>
