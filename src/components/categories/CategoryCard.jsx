@@ -12,7 +12,9 @@ import { Link } from "react-router-dom";
 function CategoryCard({ category, className }) {
     return (
         <Link
-            to={'/shop'}
+            to={`/shop`}
+            title={category.name}
+            aria-label={category.name}
             className={`category-card block p-3 bg-white border border-grey-100 rounded-lg transition-colors duration-200 sm:hover:border-primary sm:hover:shadow/40 sm:hover:shadow-primary group ${className}`}
         >
             {/* Image */}
