@@ -1,21 +1,33 @@
 import React from 'react'
+import { useAuth } from './AuthContext';
+import { supabase } from '@utils/supabaseClient';
 
 const CartContext = React.createContext()
 
+const GET_USER_CART = async () => {
+    try {
+        return await supabase.from("carts").select("*");
+    } catch (err) {
+        console.log(err.message);
+    }
+
+};
+
 export const CartProvider = ({ children }) => {
 
+    const { isAuth } = useAuth();
+
     const [isOpen, setIsOpen] = React.useState(false);
-    const [cart, setCart] = React.useState({
-        items: [],
-        total: 0
-    });
+    const [loading, setLoading] = React.useState(isAuth);
+    const [cart, setCart] = React.useState();
 
     React.useEffect(() => {
-        setCart({
-            items: [],
-            total: 0
-        })
-    }, []);
+        if (!isAuth) return;
+        setLoading(true);
+        GET_USER_CART().then(res => {
+            setCart(res.data);
+        }).finally(() => setLoading(false));
+    }, [isAuth]);
 
     const toggleDrawer = React.useCallback(() => setIsOpen(!isOpen), [isOpen]);
     const closeDrawer = React.useCallback(() => setIsOpen(false), []);
@@ -23,6 +35,7 @@ export const CartProvider = ({ children }) => {
     return (
         <CartContext.Provider value={{
             isOpen,
+            loading,
             cart,
             toggleDrawer,
             closeDrawer
