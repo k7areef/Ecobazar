@@ -12,17 +12,33 @@ function Categories() {
     const LIMIT = 7;
 
     const [searchParams] = useSearchParams();
-    const CATEGORY_PARAM = searchParams.get("category");
+    const CATEGORY_PARAM = searchParams.get("category") || "all";
 
-    const { data, isLoading } = useQuery({ // Get product categories
+    const { data, isLoading } = useQuery({
         queryKey: ["product_categories"],
         queryFn: async () => {
-            const { data, error } = await supabase
-                .from("product_categories")
-                .select("*")
-                .limit(LIMIT);
-            if (error) throw error;
-            return data;
+            const [categoriesRes, totalCountRes] = await Promise.all([
+                supabase
+                    .from("product_categories")
+                    .select("*, product_count:products(count)")
+                    .limit(LIMIT),
+                supabase
+                    .from("products")
+                    .select("*", { count: "exact", head: true })
+            ]);
+
+            if (categoriesRes.error) throw categoriesRes.error;
+            if (totalCountRes.error) throw totalCountRes.error;
+
+            const categories = categoriesRes.data.map(c => ({
+                ...c,
+                product_count: c.product_count?.[0]?.count || 0
+            }));
+
+            return {
+                categories,
+                total_count: totalCountRes.count || 0
+            };
         }
     });
 
@@ -48,7 +64,7 @@ function Categories() {
                             </li>
                         ))
                     ) : (
-                        data?.map((category) => (
+                        ([{ id: "all", name: "All Categories", product_count: data.total_count }, ...data.categories]).map((category) => (
                             <li key={category.id}>
                                 <Link
                                     to={`/shop?category=${category.id}`}

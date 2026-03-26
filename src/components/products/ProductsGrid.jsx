@@ -19,8 +19,12 @@ function ProductsGrid({ isLoading = true, products = [], limit = 4, className })
             {
                 isLoading ? (
                     Array.from({ length: limit }).map((_, index) => <ProductCardSkeleton key={index} />)
-                ) : (
+                ) : products.length > 0 ? (
                     products.map((product, index) => (<ProductCard product={product} key={index} />))
+                ) : (
+                    <div className="col-span-full text-center py-10">
+                        <p className="text-gray-500">No products found</p>
+                    </div>
                 )
             }
         </div>

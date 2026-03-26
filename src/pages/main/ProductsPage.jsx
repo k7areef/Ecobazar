@@ -5,19 +5,29 @@ import ProductsSidebar from "@components/products/ProductsSidebar";
 import useChangeTitle from "@hooks/useChangeTitle";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@utils/supabaseClient";
+import { useSearchParams } from "react-router-dom";
 
 function ProductsPage() {
     useChangeTitle({ title: 'Products' });
 
     const LIMIT = 15;
 
+    const [searchParams] = useSearchParams();
+    const CATEGORY_PARAM = searchParams.get('category') || 'all';
+
     const { data, isLoading } = useQuery({
-        queryKey: ['products'],
+        queryKey: ['products', CATEGORY_PARAM],
         queryFn: async () => {
-            const { data, error } = await supabase
+            let query = supabase
                 .from("products")
                 .select("*")
                 .limit(LIMIT);
+
+            if (CATEGORY_PARAM !== "all") {
+                query = query.eq('category_id', CATEGORY_PARAM);
+            }
+
+            const { data, error } = await query;
             if (error) throw error;
             return data;
         }
