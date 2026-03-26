@@ -34,8 +34,11 @@ function BlogCard({ blog }) {
                     }
                 </span>
             </Link>
-            <div className="blog-content p-3 md:p-5 border border-grey-100">
-                <h3 className="blog-title text-lg font-semibold mb-2 line-clamp-3">{blog.title}</h3>
+            <div className="blog-content p-3 md:p-5 border border-grey-100 space-y-2">
+                <div className="blog-info flex items-center gap-3">
+                    Blog Info
+                </div>
+                <h3 className="blog-title sm:text-lg font-semibold line-clamp-3">{blog.title}</h3>
                 <Link
                     to={`/blogs/${blog.id}`}
                     className="flex items-center gap-2 w-fit text-primary sm:hover:text-hard-primary transition-colors font-semibold"
