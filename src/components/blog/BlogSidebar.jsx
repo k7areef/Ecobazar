@@ -2,24 +2,25 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@utils/supabaseClient";
+import { Link } from "react-router-dom";
 
 function BlogSidebar() {
 
     const LIMIT = 7;
 
-    const { data: categories, isLoading: categoriesLoading } = useQuery({ // Get blog categories
+    const { data: categories, isLoading: categoriesLoading, error: categoriesError } = useQuery({ // Get blog categories
         queryKey: ["blog_categories"],
         queryFn: async () => {
             const { data, error } = await supabase
                 .from("blog_categories")
-                .select("*")
+                .select("*, blog_posts(count)")
                 .limit(LIMIT)
             if (error) throw error;
             return data
         }
     });
 
-    const { data: tags, isLoading: tagsLoading } = useQuery({ // Get blog tags
+    const { data: tags, isLoading: tagsLoading, error: tagsError } = useQuery({ // Get blog tags
         queryKey: ["blog_tags"],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -30,6 +31,29 @@ function BlogSidebar() {
             return data
         }
     });
+
+    const { data: recentPosts, isLoading: recentPostsLoading, error: recentPostsError } = useQuery({ // Get recent blog posts
+        queryKey: ["recent_blog_posts"],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from("blog_posts")
+                .select("id, title, thumbnail, created_at")
+                .order("created_at", { ascending: false })
+                .limit(3)
+            if (error) throw error;
+            return data
+        }
+    });
+
+    if (categoriesError || tagsError || recentPostsError) {
+        return (
+            <aside className="w-120 max-lg:hidden">
+                <div className="p-4 bg-red-50 text-red-600 rounded-md">
+                    Failed to load sidebar content.
+                </div>
+            </aside>
+        );
+    }
 
     return (
         <aside className="w-120 max-lg:hidden">
@@ -63,9 +87,9 @@ function BlogSidebar() {
                             </li>
                         ))
                     ) : (
-                        categories.map((category, index) => (<li key={index} className="flex items-center justify-between">
+                        categories?.map((category, index) => (<li key={category.id || index} className="flex items-center justify-between">
                             <span className="category-name">{category.name}</span>
-                            <span className="category-count text-grey-600">({134})</span>
+                            <span className="category-count text-grey-600">({category.blog_posts?.[0]?.count || 0})</span>
                         </li>))
                     )}
                 </ul>
@@ -81,7 +105,7 @@ function BlogSidebar() {
                             <div key={index} className="px-4 py-2 bg-grey-100 rounded-full text-sm animate-pulse">Loading...</div>
                         ))
                     ) : (
-                        tags.map((tag, index) => (<div key={index}>
+                        tags?.map((tag, index) => (<div key={tag.id || index}>
                             <button
                                 type="button"
                                 title={tag.name}
@@ -114,27 +138,41 @@ function BlogSidebar() {
             <div className="blog-recently-added">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Recently Added</h3>
                 <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden"></div>
-                        <div>
-                            <h4 className="font-medium text-sm">Post Title 1</h4>
-                            <p className="text-xs text-grey-600">Date</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden"></div>
-                        <div>
-                            <h4 className="font-medium text-sm">Post Title 2</h4>
-                            <p className="text-xs text-grey-600">Date</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden"></div>
-                        <div>
-                            <h4 className="font-medium text-sm">Post Title 3</h4>
-                            <p className="text-xs text-grey-600">Date</p>
-                        </div>
-                    </div>
+                    {recentPostsLoading ? (
+                        Array.from({ length: 3 }).map((_, index) => (
+                            <div key={index} className="flex items-center gap-3 animate-pulse">
+                                <div className="w-16 h-16 bg-grey-100 rounded-md"></div>
+                                <div className="flex-1 space-y-2">
+                                    <div className="h-4 bg-grey-100 rounded w-3/4"></div>
+                                    <div className="h-3 bg-grey-100 rounded w-1/2"></div>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        recentPosts?.map((post) => (
+                            <Link key={post.id} to={`/blogs/${post.id}`} className="flex items-center gap-3 group">
+                                <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden flex-shrink-0">
+                                    <img
+                                        src={post.thumbnail}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                                    />
+                                </div>
+                                <div className="min-w-0">
+                                    <h4 className="font-medium text-sm line-clamp-2 group-hover:text-primary transition-colors">
+                                        {post.title}
+                                    </h4>
+                                    <p className="text-xs text-grey-600">
+                                        {new Date(post.created_at).toLocaleDateString('en-US', {
+                                            month: 'short',
+                                            day: 'numeric',
+                                            year: 'numeric'
+                                        })}
+                                    </p>
+                                </div>
+                            </Link>
+                        ))
+                    )}
                 </div>
             </div>
         </aside>
