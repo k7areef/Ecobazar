@@ -22,5 +22,17 @@
     "icon": "monyBack",
     "name": "Money-Back Guarantee",
     "description": "30 days money-back"
+  },
+  {
+    "id": 5,
+    "icon": "organic",
+    "name": "100% Organic",
+    "description": "All products are organic"
+  },
+  {
+    "id": 6,
+    "icon": "fresh",
+    "name": "Fresh Products",
+    "description": "All products are fresh"
   }
 ]
