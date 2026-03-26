@@ -64,7 +64,7 @@ function App() {
           <Route path="settings" element={<SettingsPage />} />
         </Route>
         {/* Other */}
-        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blogs" element={<BlogPage />} />
         <Route path="/blogs/:id" element={<BlogDetailsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
