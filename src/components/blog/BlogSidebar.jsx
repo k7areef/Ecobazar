@@ -2,6 +2,27 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@utils/supabaseClient";
+import GalleryImage1 from "@assets/images/gallery/gallery-1.png";
+import GalleryImage2 from "@assets/images/gallery/gallery-2.png";
+import GalleryImage3 from "@assets/images/gallery/gallery-3.png";
+import GalleryImage4 from "@assets/images/gallery/gallery-4.png";
+import GalleryImage5 from "@assets/images/gallery/gallery-5.png";
+import GalleryImage6 from "@assets/images/gallery/gallery-6.png";
+import GalleryImage7 from "@assets/images/gallery/gallery-7.png";
+import GalleryImage8 from "@assets/images/gallery/gallery-8.png";
+import BlogItem from "./BlogItem";
+import BlogItemSkeleton from "./BlogItemSkeleton";
+
+const galleryImages = [
+    GalleryImage1,
+    GalleryImage2,
+    GalleryImage3,
+    GalleryImage4,
+    GalleryImage5,
+    GalleryImage6,
+    GalleryImage7,
+    GalleryImage8
+];
 
 function BlogSidebar() {
 
@@ -26,6 +47,19 @@ function BlogSidebar() {
                 .from("blog_tags")
                 .select("*")
                 .limit(LIMIT)
+            if (error) throw error;
+            return data
+        }
+    });
+
+    const { data: recentBlogs, isLoading: recentBlogsLoading } = useQuery({ // Get recentlly blog added
+        queryKey: ["recent_blogs"],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from("blog_posts")
+                .select("*")
+                .order("created_at", { ascending: false })
+                .limit(3)
             if (error) throw error;
             return data
         }
@@ -58,7 +92,7 @@ function BlogSidebar() {
                     {categoriesLoading ? (
                         Array.from({ length: LIMIT }).map((_, index) => (
                             <li key={index} className="flex items-center justify-between">
-                                <span className="category-name">Loading...</span>
+                                <div className="bg-grey-100 animate-pulse h-4 w-30 rounded-sm"></div>
                                 <span className="category-count text-grey-600">(0)</span>
                             </li>
                         ))
@@ -78,7 +112,9 @@ function BlogSidebar() {
                 <div className="flex items-center gap-2 flex-wrap text-nowrap">
                     {tagsLoading ? (
                         Array.from({ length: LIMIT }).map((_, index) => (
-                            <div key={index} className="px-4 py-2 bg-grey-100 rounded-full text-sm">Loading...</div>
+                            <div key={index} className="px-4 py-2 bg-grey-100 rounded-full text-sm animate-pulse">
+                                <div className="h-4 w-16"></div>
+                            </div>
                         ))
                     ) : (
                         tags.map((tag, index) => (<div key={index}>
@@ -99,13 +135,12 @@ function BlogSidebar() {
             {/* Our Gallery */}
             <div className="blog-our-gallery">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Our Gallery</h3>
-                <div className="grid grid-cols-3 gap-2">
-                    <div className="aspect-square bg-grey-100 rounded-md overflow-hidden"></div>
-                    <div className="aspect-square bg-grey-100 rounded-md overflow-hidden"></div>
-                    <div className="aspect-square bg-grey-100 rounded-md overflow-hidden"></div>
-                    <div className="aspect-square bg-grey-100 rounded-md overflow-hidden"></div>
-                    <div className="aspect-square bg-grey-100 rounded-md overflow-hidden"></div>
-                    <div className="aspect-square bg-grey-100 rounded-md overflow-hidden"></div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                    {galleryImages.map((image, index) => (
+                        <div key={index} className="aspect-square bg-grey-100 rounded-md overflow-hidden">
+                            <img src={image} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover" />
+                        </div>
+                    ))}
                 </div>
             </div>
             {/* Separator */}
@@ -114,27 +149,11 @@ function BlogSidebar() {
             <div className="blog-recently-added">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Recently Added</h3>
                 <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden"></div>
-                        <div>
-                            <h4 className="font-medium text-sm">Post Title 1</h4>
-                            <p className="text-xs text-grey-600">Date</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden"></div>
-                        <div>
-                            <h4 className="font-medium text-sm">Post Title 2</h4>
-                            <p className="text-xs text-grey-600">Date</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 bg-grey-100 rounded-md overflow-hidden"></div>
-                        <div>
-                            <h4 className="font-medium text-sm">Post Title 3</h4>
-                            <p className="text-xs text-grey-600">Date</p>
-                        </div>
-                    </div>
+                    {recentBlogsLoading ? (
+                        Array.from({ length: 3 }, (_, index) => <BlogItemSkeleton key={index} />)
+                    ) : (
+                        recentBlogs.map((blog, index) => (<BlogItem key={index} blog={blog} />))
+                    )}
                 </div>
             </div>
         </aside>
