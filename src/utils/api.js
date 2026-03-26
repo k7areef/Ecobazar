@@ -33,7 +33,7 @@ export const GET_PRODUCTS = async ({ limit }) => {
 // Categories
 export const GET_CATEGORIES = async ({ limit, byImage = false }) => {
     try {
-        let query = supabase.from("categories").select("*").limit(limit);
+        let query = supabase.from("product_categories").select("*").limit(limit);
         if (limit) {
             query = query.limit(limit);
         }

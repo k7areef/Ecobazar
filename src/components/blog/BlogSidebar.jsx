@@ -1,7 +1,36 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@utils/supabaseClient";
 
 function BlogSidebar() {
+
+    const LIMIT = 7;
+
+    const { data: categories, isLoading: categoriesLoading } = useQuery({ // Get blog categories
+        queryKey: ["blog_categories"],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from("blog_categories")
+                .select("*")
+                .limit(LIMIT)
+            if (error) throw error;
+            return data
+        }
+    });
+
+    const { data: tags, isLoading: tagsLoading } = useQuery({ // Get blog tags
+        queryKey: ["blog_tags"],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from("blog_tags")
+                .select("*")
+                .limit(LIMIT)
+            if (error) throw error;
+            return data
+        }
+    });
+
     return (
         <aside className="w-120 max-lg:hidden">
             {/* Search */}
@@ -25,10 +54,20 @@ function BlogSidebar() {
             {/* Categories */}
             <div className="blog-categories">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Top Categories</h3>
-                <ul>
-                    <li>Category 1</li>
-                    <li>Category 2</li>
-                    <li>Category 3</li>
+                <ul className="space-y-2">
+                    {categoriesLoading ? (
+                        Array.from({ length: LIMIT }).map((_, index) => (
+                            <li key={index} className="flex items-center justify-between">
+                                <span className="category-name">Loading...</span>
+                                <span className="category-count text-grey-600">(0)</span>
+                            </li>
+                        ))
+                    ) : (
+                        categories.map((category, index) => (<li key={index} className="flex items-center justify-between">
+                            <span className="category-name">{category.name}</span>
+                            <span className="category-count text-grey-600">({134})</span>
+                        </li>))
+                    )}
                 </ul>
             </div>
             {/* Separator */}
@@ -36,11 +75,24 @@ function BlogSidebar() {
             {/* Popular Tags */}
             <div className="blog-popular-tags">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Popular Tags</h3>
-                <ul>
-                    <li>Tag 1</li>
-                    <li>Tag 2</li>
-                    <li>Tag 3</li>
-                </ul>
+                <div className="flex items-center gap-2 flex-wrap text-nowrap">
+                    {tagsLoading ? (
+                        Array.from({ length: LIMIT }).map((_, index) => (
+                            <div key={index} className="px-4 py-2 bg-grey-100 rounded-full text-sm animate-pulse">Loading...</div>
+                        ))
+                    ) : (
+                        tags.map((tag, index) => (<div key={index}>
+                            <button
+                                type="button"
+                                title={tag.name}
+                                aria-label={`Filter by tag: ${tag.name}`}
+                                className="px-4 py-2 bg-grey-100 rounded-full text-sm sm:hover:bg-primary sm:hover:text-white transition"
+                            >
+                                {tag.name}
+                            </button>
+                        </div>))
+                    )}
+                </div>
             </div>
             {/* Separator */}
             <hr className="my-3 border-grey-100" />

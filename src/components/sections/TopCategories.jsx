@@ -12,7 +12,7 @@ function TopCategories() {
     const LIMIT = 6;
 
     const { data, isLoading } = useQuery({
-        queryKey: ['top-categories'],
+        queryKey: ['top_product_categories'],
         queryFn: () => GET_CATEGORIES({ limit: LIMIT, byImage: true }).then(res => res.data),
         refetchOnWindowFocus: false
     });
