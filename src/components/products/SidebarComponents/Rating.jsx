@@ -1,4 +1,5 @@
-import { faAngleUp, faCheck, faStar } from '@fortawesome/free-solid-svg-icons';
+import Checkbox from '@components/UI/Checkbox';
+import { faAngleUp, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
@@ -24,17 +25,7 @@ function Rating() {
                                 className="flex items-center gap-2"
                             >
                                 {/* Checkbox */}
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="rating"
-                                        className="hidden peer"
-                                        onChange={() => { }}
-                                    />
-                                    <div className="custom-checkbox flex items-center justify-center w-5 h-5 border-2 border-primary text-white rounded-sm peer-checked:bg-primary peer-checked:*:scale-70">
-                                        <FontAwesomeIcon icon={faCheck} className="transition-transform will-change-transform scale-0" />
-                                    </div>
-                                </label>
+                                <Checkbox name='rating' />
                                 {/* Stars */}
                                 <ul className='flex items-center gap-0.5'>
                                     {

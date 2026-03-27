@@ -1,4 +1,5 @@
-import { faAngleUp, faCircle } from "@fortawesome/free-solid-svg-icons";
+import RadioBox from "@components/UI/RadioBox";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@utils/supabaseClient";
@@ -70,19 +71,12 @@ function Categories() {
                                     to={`/shop?category=${category.id}`}
                                     className="flex items-center gap-2"
                                 >
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="category"
-                                            value={category.id}
-                                            className="hidden peer"
-                                            onChange={() => { }}
-                                            checked={CATEGORY_PARAM === category.id}
-                                        />
-                                        <div className="custom-radio-box flex items-center justify-center w-5 h-5 border-2 border-primary text-primary rounded-full peer-checked:*:scale-60">
-                                            <FontAwesomeIcon icon={faCircle} className="transition-transform will-change-transform scale-0" />
-                                        </div>
-                                    </label>
+                                    <RadioBox
+                                        checked={CATEGORY_PARAM === category.id}
+                                        value={category.id}
+                                        name="category"
+                                        onChange={() => { }}
+                                    />
                                     <span className="font-medium">{category.name}</span>
                                     <span className="text-grey-600">({category.product_count || 0})</span>
                                 </Link>
