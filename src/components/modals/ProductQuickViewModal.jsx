@@ -7,12 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping, faMinus, faPlus, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import Button from "@components/UI/Button";
+import { useCart } from "@contexts/providers/CartContext";
+import useInCart from "@hooks/useInCart";
 
 function ProductQuickViewModal() {
 
+    const { cart, addToCart } = useCart();
     const { isOpen, productId, closeModal } = useQuickViewModal();
+    const [isAddToCartLoading, setIsAddToCartLoading] = React.useState(false);
+    const [quantity, setQuantity] = React.useState(1);
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading: isDataLoading } = useQuery({
         queryKey: [`product_${productId}`, productId],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -26,6 +31,21 @@ function ProductQuickViewModal() {
         enabled: (!!productId && isOpen),
         staleTime: 5 * 60 * 1000, // 5 minutes
     });
+
+    // Check if product is in cart
+    const { inCart } = useInCart(data?.id);
+
+    React.useEffect(() => {
+        if (!isOpen || !productId) return;
+        setQuantity(cart.find(c => c.product_id === productId)?.quantity || 1);
+    }, [isOpen, productId, cart]);
+
+    const handleAddToCart = React.useCallback(async () => {
+        if (inCart || isAddToCartLoading) return;
+        setIsAddToCartLoading(true);
+        await addToCart({ productId: data.id, quantity });
+        setIsAddToCartLoading(false);
+    }, [isAddToCartLoading, inCart, addToCart, data, quantity]);
 
     return (
         <BaseModal isOpen={isOpen}>
@@ -42,7 +62,7 @@ function ProductQuickViewModal() {
                         {/* Product Image */}
                         <div className="product-image aspect-square rounded-md bg-grey-50">
                             {
-                                isLoading ? (
+                                isDataLoading ? (
                                     <div className="w-full h-full flex items-center justify-center gap-2 text-primary">
                                         <FontAwesomeIcon icon={faSpinner} className="animate-spin text-2xl" />
                                         <span className="ml-2">Loading...</span>
@@ -61,7 +81,7 @@ function ProductQuickViewModal() {
                             {/* Main Details */}
                             <div className="main-details">
                                 {
-                                    isLoading ? (
+                                    isDataLoading ? (
                                         <div className="h-8 bg-grey-100 animate-pulse rounded-sm w-3/4 mb-2"></div>
                                     ) : (
                                         <h2 className="text-2xl font-bold mb-2">{data?.title}</h2>
@@ -82,7 +102,7 @@ function ProductQuickViewModal() {
                                                 (
                                                     <div className="brand-image w-14 h-14 p-2 border border-grey-100 rounded-md">
                                                         {
-                                                            isLoading ? (
+                                                            isDataLoading ? (
                                                                 <div className="w-full h-full bg-grey-100 animate-pulse rounded-md"></div>
                                                             ) : (
                                                                 <img
@@ -109,26 +129,36 @@ function ProductQuickViewModal() {
                             {/* Separator */}
                             <hr className="my-5 border-grey-100" />
                             {/* Product Actions */}
-                            <div className="product-actions flex items-center gap-3">
+                            <div className="product-actions flex items-center max-sm:items-end gap-3">
                                 {/* Add to Cart */}
-                                <div className="add-to-cart flex-1 flex items-center gap-3">
+                                <div className="add-to-cart flex-1 flex sm:items-center gap-3 max-sm:flex-col">
                                     {/* Quantity Counter */}
-                                    <div className="qunatity-counter p-2 rounded-full border border-grey-100 flex items-center gap-2">
+                                    <div className="qunatity-counter p-2 rounded-full border border-grey-100 flex items-center justify-center gap-2">
                                         {/* Minus */}
                                         <button
                                             title="Decrease Quantity"
                                             aria-label="Decrease Quantity"
+                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                            disabled={isAddToCartLoading || isDataLoading || inCart}
                                             className="bg-grey-50 sm:hover:bg-grey-100 rounded-full w-8 h-8 flex items-center justify-center"
                                         >
                                             <FontAwesomeIcon icon={faMinus} />
                                             <span className="sr-only">Decrease Quantity</span>
                                         </button>
                                         {/* Current */}
-                                        <div className="current w-8 h-8 rounded-full flex items-center justify-center font-medium">{1}</div>
+                                        <div className="current w-8 h-8 rounded-full flex items-center justify-center font-medium">
+                                            {
+                                                isDataLoading ? (
+                                                    <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+                                                ) : (quantity)
+                                            }
+                                        </div>
                                         {/* Pluse */}
                                         <button
                                             title="Increase Quantity"
                                             aria-label="Increase Quantity"
+                                            onClick={() => setQuantity(quantity + 1)}
+                                            disabled={isAddToCartLoading || isDataLoading || inCart}
                                             className="bg-grey-50 sm:hover:bg-grey-100 rounded-full w-8 h-8 flex items-center justify-center"
                                         >
                                             <FontAwesomeIcon icon={faPlus} />
@@ -137,12 +167,14 @@ function ProductQuickViewModal() {
                                     </div>
                                     {/* Add to Cart Button */}
                                     <Button
-                                        title="Add to Cart"
-                                        aria-label="Add to Cart"
+                                        onClick={handleAddToCart}
+                                        variant={inCart ? "secondary" : "primary"}
+                                        title={inCart ? "Added to Cart" : "Add to Cart"}
+                                        aria-label={inCart ? "Added to Cart" : "Add to Cart"}
                                         className="rounded-full flex-1 flex items-center justify-center gap-3"
                                     >
-                                        <span>Add to Cart</span>
-                                        <FontAwesomeIcon icon={faCartShopping} />
+                                        <span>{inCart ? "Added to Cart" : "Add to Cart"}</span>
+                                        <FontAwesomeIcon icon={isAddToCartLoading ? faSpinner : faCartShopping} {...(isAddToCartLoading ? { className: "animate-spin" } : {})} />
                                     </Button>
                                 </div>
                                 {/* Add to Wishlist */}

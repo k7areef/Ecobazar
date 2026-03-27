@@ -28,7 +28,7 @@ function Drawer({ isOpen, closeDrawer, children }) {
         createPortal(
             <div
                 onClick={closeDrawer}
-                className="drawer h-screen w-full bg-modal-bg backdrop-blur-xs absolute z-1 top-0 left-0"
+                className="drawer h-screen w-full bg-modal-bg backdrop-blur-xs fixed z-9999 top-0 left-0"
             >
                 {children}
             </div>,

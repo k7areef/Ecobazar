@@ -43,10 +43,11 @@ export const CartProvider = ({ children }) => {
     const toggleDrawer = React.useCallback(() => setIsOpen(!isOpen), [isOpen]);
     const closeDrawer = React.useCallback(() => setIsOpen(false), []);
     // Add to cart
-    const addToCart = React.useCallback(async ({ productId }) => {
+    const addToCart = React.useCallback(async ({ productId, quantity = 1 }) => {
         try {
             const { data, error } = await supabase.from("carts").upsert({
-                product_id: productId
+                product_id: productId,
+                quantity: quantity
             }, {
                 onConflict: "user_id, product_id"
             }).select(`*, product:products(*)`).single();

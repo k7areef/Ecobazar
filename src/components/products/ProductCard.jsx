@@ -11,6 +11,7 @@ import { faShoppingBag, faSpinner, faStar } from "@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useQuickViewModal } from "@contexts/providers/QuickViewModalContext";
+import useInCart from "@hooks/useInCart";
 
 /**
  * @param {ProductCardProps} props
@@ -20,13 +21,12 @@ function ProductCard({ product, className }) {
 
     const { openModal } = useQuickViewModal();
 
-    const { cart, addToCart, removeFromCart } = useCart();
+    const { addToCart, removeFromCart } = useCart();
 
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const inCart = React.useMemo(() => {
-        return (cart || []).find(c => c.product_id === product.id);
-    }, [cart, product]);
+    // Check if product is in cart
+    const { inCart } = useInCart(product.id);
 
     const handleAddToCart = React.useCallback(async () => {
         if (isLoading) return;
