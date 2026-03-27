@@ -1,4 +1,10 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+/**
+ * @typedef {Object} BlogSidebarProps
+ * @property {string} [className]
+ * @property {() => void} [onClose]
+ */
+
+import { faFilter, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@utils/supabaseClient";
@@ -12,6 +18,7 @@ import GalleryImage7 from "@assets/images/gallery/gallery-7.png";
 import GalleryImage8 from "@assets/images/gallery/gallery-8.png";
 import BlogItem from "./BlogItem";
 import BlogItemSkeleton from "./BlogItemSkeleton";
+import Button from "@components/UI/Button";
 
 const galleryImages = [
     GalleryImage1,
@@ -24,7 +31,10 @@ const galleryImages = [
     GalleryImage8
 ];
 
-function BlogSidebar() {
+/**
+ * @param {BlogSidebarProps} props
+ */
+function BlogSidebar({ className, onClose }) {
 
     const LIMIT = 7;
 
@@ -66,7 +76,7 @@ function BlogSidebar() {
     });
 
     return (
-        <aside className="w-120 max-lg:hidden">
+        <aside onClick={e => e.stopPropagation()} className={`w-80 md:w-120 bg-white${className ? ` ${className}` : ''}`}>
             {/* Search */}
             <div className="blog-search">
                 <form className="relative">
@@ -135,7 +145,7 @@ function BlogSidebar() {
             {/* Our Gallery */}
             <div className="blog-our-gallery">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Our Gallery</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                <div className="grid grid-cols-4 gap-2">
                     {galleryImages.map((image, index) => (
                         <div key={index} className="aspect-square bg-grey-100 rounded-md overflow-hidden">
                             <img src={image} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover" />
@@ -146,7 +156,7 @@ function BlogSidebar() {
             {/* Separator */}
             <hr className="my-3 border-grey-100" />
             {/* Recently Added */}
-            <div className="blog-recently-added">
+            <div className="blog-recently-added max-lg:pb-3">
                 <h3 className="font-medium text-lg sm:text-xl mb-3">Recently Added</h3>
                 <div className="space-y-3">
                     {recentBlogsLoading ? (
@@ -155,6 +165,26 @@ function BlogSidebar() {
                         recentBlogs.map((blog, index) => (<BlogItem key={index} blog={blog} />))
                     )}
                 </div>
+            </div>
+            {/* Actions */}
+            <div className="lg:hidden pb-3 py-5 sticky bottom-0 z-10 bg-white flex flex-col gap-3 border-t border-grey-100">
+                <Button
+                    title="Apply Filter"
+                    aria-label="Apply Filter"
+                    className="rounded-full flex items-center justify-center gap-2 flex-1"
+                >
+                    <FontAwesomeIcon icon={faFilter} />
+                    <span>Apply Filter</span>
+                </Button>
+                <Button
+                    title="Close"
+                    onClick={onClose}
+                    variant="secondary"
+                    className="rounded-full flex items-center justify-center gap-2 flex-1"
+                >
+                    <FontAwesomeIcon icon={faXmark} />
+                    <span>Close</span>
+                </Button>
             </div>
         </aside>
     )
