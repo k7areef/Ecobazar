@@ -1,3 +1,4 @@
+import React from "react";
 import Pagination from "@components/common/Pagination";
 import ProductQuickViewModal from "@components/modals/ProductQuickViewModal";
 import ProductsGrid from "@components/products/ProductsGrid";
@@ -5,8 +6,8 @@ import ProductsHeader from "@components/products/ProductsHeader";
 import ProductsSidebar from "@components/products/ProductsSidebar";
 import useChangeTitle from "@hooks/useChangeTitle";
 import { useQuery } from "@tanstack/react-query";
+import { CALC_TOTAL_PAGES } from "@utils/helpers";
 import { supabase } from "@utils/supabaseClient";
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 
 function ProductsPage() {
@@ -40,7 +41,7 @@ function ProductsPage() {
         }
     });
 
-    const totalPages = Math.ceil((data?.totalCount || 0) / LIMIT);
+    const totalPages = CALC_TOTAL_PAGES(data?.totalCount, LIMIT);
 
     const handleNext = React.useCallback(() => {
         if (currentPage < totalPages) setCurrentPage(prev => prev + 1);

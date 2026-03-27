@@ -6,6 +6,7 @@ import BlogSidebarDrawer from "@components/blog/BlogSidebarDrawer";
 import Pagination from "@components/common/Pagination";
 import useChangeTitle from "@hooks/useChangeTitle";
 import { useQuery } from "@tanstack/react-query";
+import { CALC_TOTAL_PAGES } from "@utils/helpers";
 import { supabase } from "@utils/supabaseClient";
 import React from "react";
 
@@ -41,7 +42,7 @@ function BlogPage() {
         setOpenDrawer(false);
     };
 
-    const totalPages = Math.ceil((data?.totalCount || 0) / LIMIT);
+    const totalPages = CALC_TOTAL_PAGES(data?.totalCount, LIMIT);
 
     const handleNext = React.useCallback(() => {
         if (currentPage < totalPages) setCurrentPage(prev => prev + 1);

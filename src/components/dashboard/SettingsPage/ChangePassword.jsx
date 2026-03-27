@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import FormikField from '@components/UI/FormikField';
 import toast from 'react-hot-toast';
-import { UPDATE_USER } from '@utils/api';
+import { supabase } from '@utils/supabaseClient';
 
 const fields = [
     {
@@ -58,11 +58,9 @@ function ChangePassword({ className }) {
         const { setSubmitting, resetForm } = actions;
         setSubmitting(true);
         try {
-            const { error } = await UPDATE_USER({
-                values: {
-                    current_password: values.current_password,
-                    password: values.new_password
-                }
+            const { error } = await supabase.auth.updateUser({
+                current_password: values.current_password,
+                password: values.new_password
             });
             if (error) throw error;
             toast.success("Password updated successfully");

@@ -5,6 +5,7 @@
 
 import Pagination from '@components/common/Pagination';
 import { useQuery } from '@tanstack/react-query';
+import { CALC_TOTAL_PAGES } from '@utils/helpers';
 import { supabase } from '@utils/supabaseClient';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -36,7 +37,7 @@ function OrderHistory({ className }) {
         refetchOnWindowFocus: false,
     });
 
-    const totalPages = Math.ceil((data?.totalCount || 0) / LIMIT);
+    const totalPages = CALC_TOTAL_PAGES(data?.totalCount, LIMIT);
 
     const handleNext = React.useCallback(() => {
         if (currentPage < totalPages) setCurrentPage(prev => prev + 1);

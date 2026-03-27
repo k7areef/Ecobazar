@@ -3,8 +3,8 @@ import SectionHeader from "./shared/SectionHeader";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { GET_PRODUCTS } from "@utils/api";
 import ProductsGrid from "@components/products/ProductsGrid";
+import { supabase } from "@utils/supabaseClient";
 
 function FeaturedProducts() {
 
@@ -12,7 +12,13 @@ function FeaturedProducts() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['featured-products'],
-        queryFn: () => GET_PRODUCTS({ limit: LIMIT }).then(res => res.data),
+        queryFn: async () => {
+            const { data: products } = await supabase
+                .from("products")
+                .select("*")
+                .limit(LIMIT);
+            return products;
+        },
         refetchOnWindowFocus: false
     });
 

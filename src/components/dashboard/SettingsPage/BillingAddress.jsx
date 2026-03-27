@@ -12,7 +12,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import FormikField from '@components/UI/FormikField';
 import toast from 'react-hot-toast';
 import { useBillingAddress } from '@contexts/providers/UserBillingAddressContext';
-import { UPDATE_USER_BILLING_ADDRESS } from '@utils/api';
+import { supabase } from '@utils/supabaseClient';
 
 const fields = [
     {
@@ -125,12 +125,17 @@ function BillingAddress({ className }) {
         const { setSubmitting, resetForm } = actions;
         setSubmitting(true);
         try {
-            const { error } = await UPDATE_USER_BILLING_ADDRESS({ values, billingAddressId: billingAddress.id });
+            // Update billing address in database
+            const { error } = await supabase.from("addresses")
+                .update(values)
+                .eq("id", billingAddress.id);
             if (error) throw error;
+            // Update local state
             toast.success("Billing Address updated successfully");
             setBillingAddress(prev => ({ ...prev, ...values }));
             resetForm();
         } catch (err) {
+            // Show error message
             toast.error(err.message || "Something went wrong");
             console.error("Update Error:", err);
         } finally {

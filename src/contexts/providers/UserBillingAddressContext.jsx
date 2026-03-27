@@ -1,8 +1,16 @@
 import React from "react";
 import { useAuth } from "./AuthContext";
-import { GET_USER_BILLING_ADDRESS } from "@utils/api";
+import { supabase } from "@utils/supabaseClient";
 
 const UserBillingAddressContext = React.createContext();
+
+const GET_USER_BILLING_ADDRESS = async () => {
+    try {
+        return await supabase.from("addresses").select("*").single();
+    } catch (err) {
+        console.log(err);
+    }
+};
 
 export const UserBillingAddressContextProvider = ({ children }) => {
 

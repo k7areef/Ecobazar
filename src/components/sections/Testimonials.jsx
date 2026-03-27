@@ -1,12 +1,12 @@
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
-import { GET_TESTIMONIALS } from "@utils/api";
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SectionHeader from "./shared/SectionHeader";
 import TestimonialCard from "@components/testimonials/TestimonialCard";
 import TestimonialCardSkeleton from "@components/testimonials/TestimonialCardSkeleton";
+import { supabase } from "@utils/supabaseClient";
 
 function Testimonials() {
 
@@ -14,7 +14,13 @@ function Testimonials() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['testimonials'],
-        queryFn: () => GET_TESTIMONIALS({ limit: LIMIT }).then(res => res.data),
+        queryFn: async () => {
+            const { data: testimonials } = await supabase
+                .from("testimonials")
+                .select("*")
+                .limit(LIMIT);
+            return testimonials;
+        },
         refetchOnWindowFocus: false
     });
 

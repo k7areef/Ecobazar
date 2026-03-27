@@ -1,8 +1,25 @@
 import React from "react";
 import { useAuth } from "./AuthContext";
-import { GET_USER_PROFILE } from "@utils/api";
+import { supabase } from "@utils/supabaseClient";
 
 const UserProfileContext = React.createContext();
+
+const GET_USER_PROFILE = async () => {
+    try {
+        const { data, error } = await supabase
+            .from("profiles")
+            .select("*")
+            .single()
+            .then(res => {
+                return res;
+            })
+        if (error) throw error;
+        return data;
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+};
 
 export const UserProfileContextProvider = ({ children }) => {
 
@@ -17,9 +34,12 @@ export const UserProfileContextProvider = ({ children }) => {
             return;
         };
         setLoading(true);
-        GET_USER_PROFILE().then(res => { // Get User Profile
-            setProfile(res.data);
-        }).finally(() => setLoading(false));
+        // Get user profile
+        GET_USER_PROFILE().then(data => {
+            setProfile(data);
+        }).finally(() => {
+            setLoading(false);
+        });
     }, [isAuth]);
 
     return (

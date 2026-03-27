@@ -3,9 +3,9 @@ import SectionHeader from "./shared/SectionHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { GET_CATEGORIES } from "@utils/api";
 import CategoryCard from "@components/categories/CategoryCard";
 import CategoryCardSkeleton from "@components/categories/CategoryCardSkeleton";
+import { supabase } from "@utils/supabaseClient";
 
 function TopCategories() {
 
@@ -13,7 +13,14 @@ function TopCategories() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['top_product_categories'],
-        queryFn: () => GET_CATEGORIES({ limit: LIMIT, byImage: true }).then(res => res.data),
+        queryFn: async () => {
+            const { data: categories } = await supabase
+                .from("product_categories")
+                .select("*")
+                .not("image_url", "is", null)
+                .limit(LIMIT);
+            return categories;
+        },
         refetchOnWindowFocus: false
     });
 
