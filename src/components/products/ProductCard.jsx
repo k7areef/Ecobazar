@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useQuickViewModal } from "@contexts/providers/QuickViewModalContext";
 import useInCart from "@hooks/useInCart";
+import slugify from 'react-slugify';
 
 /**
  * @param {ProductCardProps} props
@@ -43,7 +44,7 @@ function ProductCard({ product, className }) {
         <div className={`product-card border border-grey-100 transition sm:hover:border-primary sm:hover:shadow/40 sm:hover:shadow-primary rounded-lg group relative overflow-hidden ${className}`}>
             {/* Product Image */}
             <Link
-                to={`/shop/${product.title}/${product.id}`}
+                to={`/shop/${slugify(product.title)}/${product.id}`}
                 className="pro-image aspect-square block"
             >
                 <img
@@ -57,7 +58,7 @@ function ProductCard({ product, className }) {
                 {/* Info */}
                 <div className="info w-full">
                     <Link
-                        to={`/shop/${product.title}/${product.id}`}
+                        to={`/shop/${slugify(product.title)}/${product.id}`}
                         className="block mb-0.5 w-fit"
                     >
                         <h3 className="pro-title line-clamp-1 font-medium sm:hover:underline sm:group-hover:text-primary transition-colors duration-200">{product.title}</h3>

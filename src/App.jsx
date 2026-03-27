@@ -65,7 +65,7 @@ function App() {
         </Route>
         {/* Other */}
         <Route path="/blogs" element={<BlogPage />} />
-        <Route path="/blogs/:id" element={<BlogDetailsPage />} />
+        <Route path="/blogs/:slug/:id" element={<BlogDetailsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/faqs" element={<FaqsPage />} />

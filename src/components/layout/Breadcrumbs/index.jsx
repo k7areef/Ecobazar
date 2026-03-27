@@ -13,8 +13,13 @@ function Breadcrumbs() {
 
     const pathnames = pathname.split('/').filter(x => x);
 
+    const filteredPathnames = pathnames.filter(name => {
+        const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(name);
+        return !isUuid;
+    });
+
     return (
-        <nav aria-label="Breadcrumb" className="breadcrumbs h-30 relative">
+        <nav aria-label="Breadcrumb" className="breadcrumbs h-20 sm:h-30 relative">
             {/* Background */}
             <img
                 src={BreadcrumbsBg}
@@ -27,7 +32,7 @@ function Breadcrumbs() {
                     to={'/'}
                     title="Home"
                     aria-label="Home"
-                    className="text-grey-500 text-2xl transition duration-200 ease-out hover:text-primary"
+                    className="text-grey-500 text-xl sm:text-2xl transition duration-200 ease-out hover:text-primary"
                 >
                     <FontAwesomeIcon icon={faHouse} />
                     <span className="sr-only">Go to Home Page</span>
@@ -36,14 +41,14 @@ function Breadcrumbs() {
                 <FontAwesomeIcon icon={faAngleRight} className="text-grey-500" />
                 {/* Routes */}
                 {
-                    pathnames.map((name, index) => {
-                        const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
-                        const isLast = index === pathnames.length - 1;
+                    filteredPathnames.map((name, index) => {
+                        const routeTo = `/${filteredPathnames.slice(0, index + 1).join("/")}`;
+                        const isLast = index === filteredPathnames.length - 1;
 
                         return (
                             <React.Fragment key={routeTo}>
                                 {isLast ? (
-                                    <span className="text-primary text-lg font-medium capitalize">
+                                    <span className="text-primary sm:text-lg font-medium capitalize">
                                         {name.replace(/-/g, ' ')}
                                     </span>
                                 ) : (

@@ -6,6 +6,7 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import slugify from "react-slugify";
 
 /**
  * @param {BlogCardProps} props
@@ -15,7 +16,7 @@ function BlogCard({ blog }) {
     return (
         <div className="blog-card rounded-lg overflow-hidden">
             <Link
-                to={`/blogs/${blog.id}`}
+                to={`/blogs/${slugify(blog.title)}/${blog.id}`}
                 className="blog-image aspect-4/3 bg-grey-100 block overflow-hidden relative"
             >
                 <img
@@ -40,7 +41,7 @@ function BlogCard({ blog }) {
                 </div>
                 <h3 className="blog-title sm:text-lg font-semibold line-clamp-3">{blog.title}</h3>
                 <Link
-                    to={`/blogs/${blog.id}`}
+                    to={`/blogs/${slugify(blog.title)}/${blog.id}`}
                     className="flex items-center gap-2 w-fit text-primary sm:hover:text-hard-primary transition-colors font-semibold"
                 >
                     <span>Read More</span>
