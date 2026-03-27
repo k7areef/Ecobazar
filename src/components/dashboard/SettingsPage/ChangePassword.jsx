@@ -79,7 +79,7 @@ function ChangePassword({ className }) {
         <div className={`change-password border border-grey-100 rounded-lg${className ? ` ${className}` : ''}`}>
             {/* Heading */}
             <div className="heading p-3 md:p-5 border-b border-b-grey-100">
-                <h3 className='font-semibold text-lg'>Account Settings</h3>
+                <h3 className='font-semibold text-lg'>Change Password</h3>
             </div>
             {/* Content */}
             <div className="content-wrapper p-3 md:p-5">
