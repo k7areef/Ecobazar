@@ -1,5 +1,5 @@
 import RadioBox from "@components/UI/RadioBox";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@utils/supabaseClient";
@@ -50,7 +50,7 @@ function Categories() {
                 className="heading flex items-center justify-between cursor-pointer"
             >
                 <h3 className="font-medium text-lg sm:text-xl select-none">All Categories</h3>
-                <FontAwesomeIcon icon={faAngleUp} />
+                <FontAwesomeIcon icon={faAngleDown} className={`transition ${isOpen ? "rotate-180" : ""}`} />
             </div>
             {/* Category List */}
             <div className={`category-list transition-all will-change-auto grid ${isOpen ? "grid-rows-[1fr] mt-3" : "grid-rows-[0fr]"}`}>

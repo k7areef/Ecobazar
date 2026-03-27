@@ -1,5 +1,5 @@
 import React from "react";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Slider from '@radix-ui/react-slider';
 
@@ -15,7 +15,7 @@ function PriceRange() {
                 className="heading flex items-center justify-between cursor-pointer"
             >
                 <h3 className="font-medium text-lg sm:text-xl select-none">Price</h3>
-                <FontAwesomeIcon icon={faAngleUp} />
+                <FontAwesomeIcon icon={faAngleDown} className={`transition ${isOpen ? "rotate-180" : ""}`} />
             </div>
             {/* Price Range */}
             <div className={`price-range transition-all will-change-auto grid ${isOpen ? "grid-rows-[1fr] mt-3" : "grid-rows-[0fr]"}`}>

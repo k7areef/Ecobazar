@@ -84,9 +84,7 @@ function MiddleBar() {
                             <div className="cart-products-count bg-hard-primary text-white w-6 h-6 rounded-full flex items-center justify-center absolute z-1 top-0 right-0 translate-x-2.5 -translate-y-4">{
                                 isInitialLoading ? (
                                     <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
-                                ) : (
-                                    cartCount
-                                )
+                                ) : (cartCount || 0)
                             }</div>
                             <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
                         </div>
