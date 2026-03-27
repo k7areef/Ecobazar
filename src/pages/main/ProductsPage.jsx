@@ -22,6 +22,10 @@ function ProductsPage() {
     const [searchParams] = useSearchParams();
     const CATEGORY_PARAM = searchParams.get('category') || 'all';
 
+    React.useEffect(() => { // Reset page when category changes
+        setCurrentPage(1);
+    }, [CATEGORY_PARAM]);
+
     const { data, isLoading } = useQuery({
         queryKey: ['products', CATEGORY_PARAM, currentPage],
         queryFn: async () => {
