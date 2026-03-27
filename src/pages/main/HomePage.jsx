@@ -1,4 +1,5 @@
 import NewsLetterModal from "@components/modals/NewsletterModal";
+import ProductQuickViewModal from "@components/modals/ProductQuickViewModal";
 import CompanyLogo from "@components/sections/CompanyLogo";
 import ContactInformation from "@components/sections/ContactInformation";
 import FeaturedProducts from "@components/sections/FeaturedProducts";
@@ -29,6 +30,8 @@ function HomePage() {
             </main>
             {/* News Letter Modal */}
             <NewsLetterModal />
+            {/* Quick View Modal */}
+            <ProductQuickViewModal />
         </div>
     )
 }

@@ -10,12 +10,15 @@ import { faEye, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faShoppingBag, faSpinner, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { useQuickViewModal } from "@contexts/providers/QuickViewModalContext";
 
 /**
  * @param {ProductCardProps} props
  */
 
 function ProductCard({ product, className }) {
+
+    const { openModal } = useQuickViewModal();
 
     const { cart, addToCart, removeFromCart } = useCart();
 
@@ -97,6 +100,7 @@ function ProductCard({ product, className }) {
                     type="button"
                     title="Quick View"
                     aria-label="Quick View"
+                    onClick={() => openModal(product.id)}
                     className="text-xl w-12 h-12 rounded-full flex items-center justify-center border border-primary bg-white"
                 >
                     <FontAwesomeIcon icon={faEye} />

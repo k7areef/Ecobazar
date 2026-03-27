@@ -3,6 +3,7 @@ import { CartProvider } from "./providers/CartContext";
 import { AuthContextProvider } from "./providers/AuthContext";
 import { UserProfileContextProvider } from "./providers/UserProfileContext";
 import { UserBillingAddressContextProvider } from "./providers/UserBillingAddressContext";
+import { QuickViewModalContextProvider } from "./providers/QuickViewModalContext";
 
 function AppProviders({ children }) {
     return (
@@ -11,7 +12,9 @@ function AppProviders({ children }) {
                 <UserProfileContextProvider>
                     <UserBillingAddressContextProvider>
                         <CartProvider>
-                            {children}
+                            <QuickViewModalContextProvider>
+                                {children}
+                            </QuickViewModalContextProvider>
                         </CartProvider>
                     </UserBillingAddressContextProvider>
                 </UserProfileContextProvider>

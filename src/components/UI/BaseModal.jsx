@@ -23,10 +23,8 @@ function BaseModal({ isOpen, children }) {
     if (!isOpen) return null;
 
     return createPortal(
-        <div className="base-modal h-screen w-full bg-modal-bg flex items-center absolute left-0 top-0 z-1">
-            <div className="container">
-                {children}
-            </div>
+        <div className="base-modal h-screen w-full bg-modal-bg fixed left-0 top-0 z-999">
+            {children}
         </div>,
         document.getElementById('modal-root')
     )
