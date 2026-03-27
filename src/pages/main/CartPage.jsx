@@ -195,6 +195,7 @@ function CartPage() {
                                 <input
                                     required
                                     type="text"
+                                    name="couponCode"
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
                                     placeholder="Enter coupon code"
