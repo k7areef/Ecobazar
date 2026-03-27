@@ -3,8 +3,7 @@
  * @prop {string} [className]
  */
 
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Pagination from '@components/common/Pagination';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@utils/supabaseClient';
 import React from 'react';
@@ -32,7 +31,6 @@ function OrderHistory({ className }) {
                 .range(from, to);
 
             if (error) throw error;
-            console.log(data);
             return { orders: data, totalCount: count };
         },
         refetchOnWindowFocus: false,
@@ -47,8 +45,6 @@ function OrderHistory({ className }) {
     const handlePrev = React.useCallback(() => {
         if (currentPage > 1) setCurrentPage(prev => prev - 1);
     }, [currentPage]);
-
-    const btnStyles = 'text-xl bg-white border border-grey-100 disabled:bg-grey-50 disabled:border-transparent disabled:text-grey-300 disabled:cursor-not-allowed! not-disabled:sm:hover:bg-grey-100 not-disabled:transition-colors';
 
     return (
         <div className={`order-history border border-grey-100 rounded-lg${className ? ` ${className}` : ""}`}>
@@ -110,27 +106,18 @@ function OrderHistory({ className }) {
                     <tfoot>
                         <tr>
                             <td colSpan={5}>
-                                <div className='orders-pagination p-3 flex items-center justify-center gap-3 w-full *:w-10 *:h-10 *:rounded-full *:flex *:items-center *:justify-center'>
-                                    <button
-                                        type='button'
-                                        onClick={handlePrev}
-                                        disabled={currentPage === 1 || isLoading}
-                                        className={`${btnStyles}`}
-                                    >
-                                        <FontAwesomeIcon icon={faAngleLeft} />
-                                    </button>
-                                    <div className='flex items-center justify-center bg-primary text-white font-medium'>
-                                        {currentPage}
-                                    </div>
-                                    <button
-                                        type='button'
-                                        onClick={handleNext}
-                                        disabled={currentPage >= totalPages || isLoading}
-                                        className={`${btnStyles}`}
-                                    >
-                                        <FontAwesomeIcon icon={faAngleRight} />
-                                    </button>
-                                </div>
+                                <Pagination
+                                    pageCount={totalPages}
+                                    current={currentPage}
+                                    handleNext={handleNext}
+                                    handlePrev={handlePrev}
+                                    className='justify-center p-3'
+                                    handlePageChange={(page) => {
+                                        setCurrentPage(page);
+                                    }}
+                                    prevDisabled={currentPage === 1 || isLoading}
+                                    nextDisabled={currentPage >= totalPages || isLoading}
+                                />
                             </td>
                         </tr>
                     </tfoot>
