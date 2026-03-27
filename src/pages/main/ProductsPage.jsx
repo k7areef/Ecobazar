@@ -44,7 +44,7 @@ function ProductsPage() {
                     <ProductsSidebar />
                     {/* Main Content */}
                     <main className="main-content flex-1 min-w-0">
-                        <ProductsGrid isLoading={isLoading} products={data || []} limit={LIMIT} />
+                        <ProductsGrid isLoading={isLoading} products={data || []} limit={LIMIT} className="2xl:grid-cols-3!" />
                     </main>
                 </div>
             </div>
